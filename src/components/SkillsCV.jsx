@@ -1,22 +1,27 @@
 import { FaReact, FaJs, FaNodeJs, FaCss3Alt, FaHtml5, FaDatabase } from "react-icons/fa";
-import { SiExpress, SiTypescript, SiMongodb } from "react-icons/si";
+import { SiExpress, SiTypescript, SiNextdotjs, SiTailwindcss, SiPostman } from "react-icons/si";
+import { TbApi } from "react-icons/tb";
 import okeke from "../assets/Okeke.pdf";
 
 function SkillsCV({ darkMode }) {
   const frontendSkills = [
     { name: "React", icon: <FaReact size={30} />, level: 90 },
-    { name: "JavaScript", icon: <FaJs size={30} />, level: 90 },
-    { name: "TypeScript", icon: <SiTypescript size={30} />, level: 85 },
-    { name: "HTML5", icon: <FaHtml5 size={30} />, level: 90 },
-    { name: "CSS3 / Tailwind", icon: <FaCss3Alt size={30} />, level: 85 },
+    { name: "JavaScript", icon: <FaJs size={30} />, level: 95 },
+    { name: "TypeScript", icon: <SiTypescript size={30} />, level: 95 },
+    { name: "HTML5", icon: <FaHtml5 size={30} />, level: 95 },
+    { name: "CSS3 / Tailwind", icon: <FaCss3Alt size={30} />, level: 95 },
+    { name: "Next.js", icon: <SiNextdotjs size={30} />, level: 95 },
+    { name: "Tailwind CSS", icon: <SiTailwindcss size={30} />, level: 95 },
   ];
 
   const backendSkills = [
-    { name: "Node.js", icon: <FaNodeJs size={30} />, level: 90 },
-    { name: "Express.js", icon: <SiExpress size={30} />, level: 90 },
-    { name: "MongoDB", icon: <SiMongodb size={30} />, level: 65 },
-    { name: "SQL / Databases", icon: <FaDatabase size={30} />, level: 80 },
-  ];
+    { name: "Node.js", icon: <FaNodeJs size={30} />, level: 95 },
+    { name: "Express.js", icon: <SiExpress size={30} />, level: 95 },
+    { name: "SQL / Databases", icon: <FaDatabase size={30} />, level: 95 },
+    { name: "REST APIs", icon: <TbApi size={30} />, level: 95 },
+    { name: "Next.js API Routes", icon: <SiNextdotjs size={30} />, level: 95 },
+    { name: "API Integration", icon: <SiPostman size={30} />, level: 90 },
+   ];
 
   const renderSkills = (skills) =>
     skills.map((skill) => (

@@ -1,82 +1,58 @@
-import blissbuy from "../images/Bliss-buy.png";
-import blissstore from "../images/Bliss-store.png";
-import blogapp from "../images/blog-app.png";
-import doqueue from "../images/DoQueue.png";
-import getadvice from "../images/Get-advice.png";
-import landingpage from "../images/Landingpage-Ecommerce.png";
-import trackfi from "../images/TrackFi.png";
-import weatherapp from "../images/Weather-App.png";
-import fuelupright from "../images/FuelUpRight.png";
+import BlissBuy from "../images/Bliss-buy.png";
+import BlissStore from "../images/Bliss-store.png";
+import DoQueue from "../images/DoQueue.png";
+import PizzaBliss from "../images/PizzaBliss-ad.png";
+import TrackMoni from "../images/trackmoni-ad.png";
+
+
 
 const projectImages = {
-  "BlissBuy": blissbuy,
-  "TrackFi": trackfi,
-  "DoQueue": doqueue,
-  "Get Advice": getadvice,
-  "E-commerce Landing Page": landingpage,
-  "Blog App": blogapp,
-  "Bliss Store": blissstore,
-  "Weather App": weatherapp,
-  "Fuel Up Right" : fuelupright
+   "TrackMoni": TrackMoni,
+   "PizzaBliss": PizzaBliss,
+   "BlissBuy": BlissBuy,
+   "Bliss Store": BlissStore,
+   "DoQueue": DoQueue,
+
+  
 };
 
 function Projects({ darkMode }) {
   const projects = [
+
+    { name: "TrackMoni",
+      description: "TrackMoni is a full-stack personal finance platform built with Next.js, PostgreSQL, enabling users to track income and expenses through real-time dashboards and interactive analytics, delivered as a fast, installable Progressive Web App.",
+      tech: ["Next.js","TypeScript","Tailwind CSS","Recharts","PWA"],
+      link: "https://www.trackmoni.online/"
+    },
+
+    { name: "PizzaBliss",
+      description: "PizzaBliss is a full-stack pizza ordering platform built with Next.js, PostgreSQL, featuring menu browsing, cart management, authentication, and secure checkout with a fast, responsive user experience.", 
+      tech: ["Next.js","TypeScript","Tailwind CSS"],
+      link: "https://pizzabliss.vercel.app/"
+    },
+
     {
       name: "BlissBuy",
       description: "E-commerce frontend built with React and Tailwind, featuring product filtering and modern UI.",
       tech: ["React", "Tailwind CSS", "Axios, TypeScript"],
       link: "https://bliss-buy.vercel.app/"
     },
-    {
-      name: "TrackFi",
-      description: "Personal finance tracker with transaction list, summary, and monthly breakdown.",
-      tech: ["React", "Tailwind CSS", "JavaScript"],
-      link: "https://track-fi-henna.vercel.app/"
-    },
-    {
-      name: "DoQueue",
-      description: "Task management app to organize and track daily tasks efficiently.",
-      tech: ["React", "JavaScript", "CSS"],
-      link: "https://do-queue-steel.vercel.app/"
-    },
-    {
-      name: "Get Advice",
-      description: "Advice app fetching random advice from API using React and Axios.",
-      tech: ["React", "Axios", "JavaScript"],
-      link: "https://get-advice-xi.vercel.app/"
-    },
-    {
-      name: "E-commerce Landing Page",
-      description: "Modern, responsive landing page for an online store featuring product filtering, dynamic product display, and smooth interactive UI.",
-      tech: ["React", "Axios", "TypeScript", "Tailwind CSS"],
-      link: "https://ecommerce-landing-page-eight.vercel.app/"
-    },
-    {
-      name: "Blog App",
-      description: "A modern, responsive blog app built with React for creating, reading, and browsing engaging posts with a smooth user experience.",
-      tech: ["React", "Axios", "TypeScript", "Tailwind CSS"],
-      link: "https://blogs-app-eta-ivory.vercel.app/"
-    },
+
     {
       name: "Bliss Store",
       description: "Modern fashion and beauty e-commerce store featuring clothing, lipsticks, and fragrances. Includes dynamic product filtering and smooth UI interactions.",
       tech: ["React", "Axios", "TypeScript", "Tailwind CSS"],
       link: "https://bliss-store.vercel.app/"
     },
+    
     {
-      name: "Weather App",
-      description: "Dynamic weather app showing real-time weather and forecast by city.",
-      tech: ["Html", "JavaScript", "API", "CSS"],
-      link: "https://weather-app-lovat-three-48.vercel.app/"
-    },
-    {
-      name: "Fuel Up Right",
-      description: "A responsive nutrition website providing meal plans, health tips, and BMI tracking for a healthier lifestyle.",
-      tech: ["Html", "JavaScript", "CSS"],
-      link: "https://fuel-up-right.vercel.app/"
+      name: "DoQueue",
+      description: "Task management app to organize and track daily tasks efficiently.",
+      tech: ["React", "JavaScript", "CSS"],
+      link: "https://do-queue-steel.vercel.app/"
     }
-  ];
+  ]
+
 
   return (
     <section

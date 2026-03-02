@@ -1,3 +1,13 @@
+import {
+  FaReact,
+  FaJs,
+  FaNodeJs,
+  FaCss3Alt,
+  FaHtml5,
+} from "react-icons/fa";
+import { SiTypescript, SiNextdotjs, SiTailwindcss } from "react-icons/si";
+import { TbApi } from "react-icons/tb";
+
 function AboutMe({ darkMode }) {
   return (
     <section
@@ -18,30 +28,43 @@ function AboutMe({ darkMode }) {
         </p>
 
         <p data-aos="fade-up" data-aos-delay="400">
-          Skilled in <strong>React, JavaScript, HTML, CSS, Express.js, Node.js</strong>,
-          and always eager to learn new technologies. I value clean code,
-          creativity, and continuous improvement.
+          Skilled in modern frontend and backend technologies, focused on
+          building scalable applications, clean user interfaces, and efficient
+          APIs while continuously learning and improving.
         </p>
       </div>
 
+      {/* ✅ ICON SKILLS SECTION */}
       <div
-        className="flex flex-wrap justify-center mt-8 gap-3 sm:gap-4"
+        className="flex flex-wrap justify-center mt-10 gap-6"
         data-aos="fade-up"
         data-aos-delay="500"
       >
-        {["React", "JavaScript", "Typescript", "HTML", "CSS", "Express.js"].map((skill, index) => (
-          <span
-            key={skill}
-            className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-full font-semibold text-sm sm:text-base md:text-lg transition-colors duration-300 ${
-              darkMode
-                ? "bg-emerald-500 text-black"
-                : "bg-emerald-600 text-white"
+        {[
+          { icon: <FaReact size={40} />, name: "React" },
+          { icon: <SiNextdotjs size={40} />, name: "Next.js" },
+          { icon: <FaJs size={40} />, name: "JavaScript" },
+          { icon: <SiTypescript size={40} />, name: "TypeScript" },
+          { icon: <FaNodeJs size={40} />, name: "Node.js" },
+          { icon: <TbApi size={40} />, name: "REST API" },
+          { icon: <SiTailwindcss size={40} />, name: "Tailwind CSS" },
+          { icon: <FaHtml5 size={40} />, name: "HTML5" },
+          { icon: <FaCss3Alt size={40} />, name: "CSS3" },
+        ].map((skill, index) => (
+          <div
+            key={skill.name}
+            className={`flex flex-col items-center justify-center p-4 rounded-xl transition-transform duration-300 hover:scale-110 ${
+              darkMode ? "bg-zinc-900" : "bg-gray-100"
             }`}
             data-aos="zoom-in"
             data-aos-delay={600 + index * 100}
           >
-            {skill}
-          </span>
+            <span className="mb-2">{skill.icon}</span>
+
+            <span className="text-sm sm:text-base font-semibold">
+              {skill.name}
+            </span>
+          </div>
         ))}
       </div>
     </section>
