@@ -1,16 +1,10 @@
-import BlissBuy from "../images/Bliss-buy.png";
-import BlissStore from "../images/Bliss-store.png";
 import DoQueue from "../images/DoQueue.png";
-import PizzaBliss from "../images/PizzaBliss-ad.png";
 import TrackMoni from "../images/trackmoni-ad.png";
 
 
 
 const projectImages = {
    "TrackMoni": TrackMoni,
-   "PizzaBliss": PizzaBliss,
-   "BlissBuy": BlissBuy,
-   "Bliss Store": BlissStore,
    "DoQueue": DoQueue,
 
   
@@ -25,26 +19,6 @@ function Projects({ darkMode }) {
       link: "https://www.trackmoni.online/"
     },
 
-    { name: "PizzaBliss",
-      description: "PizzaBliss is a full-stack pizza ordering platform built with Next.js, PostgreSQL, featuring menu browsing, cart management, authentication, and secure checkout with a fast, responsive user experience.", 
-      tech: ["Next.js","TypeScript","Tailwind CSS"],
-      link: "https://pizzabliss.vercel.app/"
-    },
-
-    {
-      name: "BlissBuy",
-      description: "E-commerce frontend built with React and Tailwind, featuring product filtering and modern UI.",
-      tech: ["React", "Tailwind CSS", "Axios, TypeScript"],
-      link: "https://bliss-buy.vercel.app/"
-    },
-
-    {
-      name: "Bliss Store",
-      description: "Modern fashion and beauty e-commerce store featuring clothing, lipsticks, and fragrances. Includes dynamic product filtering and smooth UI interactions.",
-      tech: ["React", "Axios", "TypeScript", "Tailwind CSS"],
-      link: "https://bliss-store.vercel.app/"
-    },
-    
     {
       name: "DoQueue",
       description: "Task management app to organize and track daily tasks efficiently.",
