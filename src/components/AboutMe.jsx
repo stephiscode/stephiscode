@@ -1,71 +1,149 @@
 import {
-  FaReact,
-  FaJs,
-  FaNodeJs,
-  FaCss3Alt,
-  FaHtml5,
-} from "react-icons/fa";
-import { SiTypescript, SiNextdotjs, SiTailwindcss } from "react-icons/si";
-import { TbApi } from "react-icons/tb";
+  BadgeCheck,
+  Cloud,
+  Code2,
+  Database,
+  Gauge,
+  ServerCog,
+  Smartphone,
+  Workflow,
+} from "lucide-react";
+
+const strengths = [
+  {
+    title: "Frontend systems",
+    icon: Code2,
+    copy: "React interfaces with clean structure, strong states, responsive layouts, and sharp interaction details.",
+  },
+  {
+    title: "Mobile apps",
+    icon: Smartphone,
+    copy: "React Native product thinking for mobile experiences that feel focused, usable, and connected to real APIs.",
+  },
+  {
+    title: "Backend logic",
+    icon: ServerCog,
+    copy: "Node and Express APIs that keep data flows readable, secure, and ready for real users.",
+  },
+  {
+    title: "Data design",
+    icon: Database,
+    copy: "PostgreSQL-backed thinking for dashboards, finance tools, tasks, and product workflows.",
+  },
+  {
+    title: "Performance",
+    icon: Gauge,
+    copy: "Fast pages, lean components, clear loading states, and UI decisions that respect attention.",
+  },
+  {
+    title: "Product delivery",
+    icon: Cloud,
+    copy: "Modern build tooling, deployment awareness, and production polish across web and mobile product work.",
+  },
+];
+
+const workflow = [
+  "Map the user flow before touching the interface",
+  "Build the backend contract around real data needs",
+  "Design responsive screens that feel fast and obvious",
+  "Ship, review, refine, and keep the product moving",
+];
 
 function AboutMe({ darkMode }) {
   return (
     <section
-      className={`w-full min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 md:px-16 py-16 transition-colors duration-500 ${
-        darkMode ? "bg-black text-white" : "bg-white text-black"
+      id="about"
+      className={`px-4 py-20 sm:px-6 lg:px-8 ${
+        darkMode ? "bg-zinc-950 text-white" : "bg-white text-slate-950"
       }`}
     >
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 text-center">
-        About <span className="text-emerald-400">Me</span>
-      </h2>
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div data-aos="fade-up">
+            <div
+              className={`mb-5 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-black ${
+                darkMode
+                  ? "border-cyan-300/20 bg-cyan-300/10 text-cyan-200"
+                  : "border-cyan-600/20 bg-cyan-50 text-cyan-800"
+              }`}
+            >
+              <Workflow size={16} />
+              Systems, screens, and shipping
+            </div>
 
-      <div className="max-w-xl sm:max-w-2xl md:max-w-3xl text-center space-y-4 text-base sm:text-lg md:text-xl">
-        <p>
-          Hi, I'm <strong>Okeke Stephen</strong>, a Full-Stack Software Developer
-          passionate about building modern, responsive, and interactive web
-          applications. I enjoy creating projects that solve real-world problems
-          and enhance user experiences.
-        </p>
+            <h2 className="max-w-3xl text-balance text-4xl font-black sm:text-5xl">
+              A fullstack software engineer who can own the flow end to end.
+            </h2>
 
-        <p data-aos="fade-up" data-aos-delay="400">
-          Skilled in modern frontend and backend technologies, focused on
-          building scalable applications, clean user interfaces, and efficient
-          APIs while continuously learning and improving.
-        </p>
-      </div>
+            <div
+              className={`mt-6 space-y-5 text-lg leading-8 ${
+                darkMode ? "text-zinc-300" : "text-slate-700"
+              }`}
+            >
+              <p>
+                I build with the whole product in mind: how a user finds the
+                feature, how the screen responds, how the API behaves, how the
+                database stores truth, and how the final product feels in
+                someone&apos;s hands.
+              </p>
+              <p>
+                My work sits where design sense meets engineering discipline. I
+                care about clean interfaces, useful systems, and code that can
+                grow without becoming painful to maintain.
+              </p>
+            </div>
 
-      {/* ✅ ICON SKILLS SECTION */}
-      <div
-        className="flex flex-wrap justify-center mt-10 gap-6"
-        data-aos="fade-up"
-        data-aos-delay="500"
-      >
-        {[
-          { icon: <FaReact size={40} />, name: "React" },
-          { icon: <SiNextdotjs size={40} />, name: "Next.js" },
-          { icon: <FaJs size={40} />, name: "JavaScript" },
-          { icon: <SiTypescript size={40} />, name: "TypeScript" },
-          { icon: <FaNodeJs size={40} />, name: "Node.js" },
-          { icon: <TbApi size={40} />, name: "REST API" },
-          { icon: <SiTailwindcss size={40} />, name: "Tailwind CSS" },
-          { icon: <FaHtml5 size={40} />, name: "HTML5" },
-          { icon: <FaCss3Alt size={40} />, name: "CSS3" },
-        ].map((skill, index) => (
-          <div
-            key={skill.name}
-            className={`flex flex-col items-center justify-center p-4 rounded-xl transition-transform duration-300 hover:scale-110 ${
-              darkMode ? "bg-zinc-900" : "bg-gray-100"
-            }`}
-            data-aos="zoom-in"
-            data-aos-delay={600 + index * 100}
-          >
-            <span className="mb-2">{skill.icon}</span>
-
-            <span className="text-sm sm:text-base font-semibold">
-              {skill.name}
-            </span>
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {workflow.map((item) => (
+                <div
+                  key={item}
+                  className={`flex items-start gap-3 rounded-3xl border p-4 ${
+                    darkMode
+                      ? "border-white/10 bg-white/[0.04]"
+                      : "border-slate-200 bg-slate-50"
+                  }`}
+                >
+                  <BadgeCheck
+                    size={20}
+                    className="mt-0.5 shrink-0 text-emerald-300"
+                  />
+                  <span className="text-sm font-bold leading-6">{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        ))}
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {strengths.map((item, index) => {
+              const Icon = item.icon;
+
+              return (
+                <article
+                  key={item.title}
+                  className={`rounded-[1.75rem] border p-5 transition hover:-translate-y-1 ${
+                    darkMode
+                      ? "border-white/10 bg-white/[0.04] hover:border-emerald-300/35"
+                      : "border-slate-200 bg-white shadow-sm hover:border-emerald-400"
+                  }`}
+                  data-aos="fade-up"
+                  data-aos-delay={index * 60}
+                >
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-300 text-zinc-950">
+                    <Icon size={22} />
+                  </div>
+                  <h3 className="text-lg font-black">{item.title}</h3>
+                  <p
+                    className={`mt-3 text-sm leading-6 ${
+                      darkMode ? "text-zinc-400" : "text-slate-600"
+                    }`}
+                  >
+                    {item.copy}
+                  </p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );

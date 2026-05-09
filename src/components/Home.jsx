@@ -1,19 +1,19 @@
-import AboutMe from "./AboutMe"
-import ContactMe from "./ContactMe"
-import Footer from "./Footer"
-import Hero from "./Hero"
-import NavBar from "./NavBar"
-import Projects from "./Projects"
+import AboutMe from "./AboutMe";
+import ContactMe from "./ContactMe";
+import Hero from "./Hero";
+import Projects from "./Projects";
+import SkillsCV from "./SkillsCV";
 
-function Home({darkMode}) {
+function Home({ darkMode }) {
   return (
-   <>
-     <Hero darkMode={darkMode}/>
-   <AboutMe darkMode={darkMode} />
+    <>
+      <Hero darkMode={darkMode} />
+      <AboutMe darkMode={darkMode} />
       <Projects darkMode={darkMode} />
+      <SkillsCV darkMode={darkMode} />
       <ContactMe darkMode={darkMode} />
-   </>
-  )
+    </>
+  );
 }
 
 export default Home;

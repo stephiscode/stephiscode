@@ -1,88 +1,146 @@
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { ArrowUpRight, Mail } from "lucide-react";
+import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+
+import StephLogo from "../images/stephiscode-icon-black.svg";
+
+const links = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Projects", href: "#projects" },
+  { label: "Skills", href: "#skills" },
+  { label: "Contact", href: "#contact" },
+];
+
+const socials = [
+  { label: "GitHub", href: "https://github.com/stephiscode", icon: FaGithub },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/stephen-okeke-405569331/",
+    icon: FaLinkedin,
+  },
+  { label: "Email", href: "mailto:Stephiscode@gmail.com", icon: FaEnvelope },
+];
 
 function Footer({ darkMode }) {
+  const year = new Date().getFullYear();
+
   return (
     <footer
-      className={`w-full px-4 sm:px-6 md:px-16 py-12 transition-colors duration-500 ${
-        darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
+      className={`border-t px-4 py-12 sm:px-6 lg:px-8 ${
+        darkMode
+          ? "border-white/10 bg-zinc-950 text-white"
+          : "border-slate-200 bg-white text-slate-950"
       }`}
     >
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        <div className="flex flex-col items-start space-y-4">
-          <h3 className="text-2xl sm:text-3xl font-extrabold tracking-wide drop-shadow-lg">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-green-300 to-emerald-500">
-              StephisCode
+      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
+        <div>
+          <div className="flex items-center gap-3">
+            <span
+              className={`flex h-12 w-12 items-center justify-center rounded-2xl border ${
+                darkMode
+                  ? "border-emerald-400/30 bg-white/5"
+                  : "border-emerald-500/30 bg-emerald-50"
+              }`}
+            >
+              <img
+                src={StephLogo}
+                alt="StephisCode logo"
+                className="h-8 w-8 object-contain"
+              />
             </span>
-          </h3>
+            <div>
+              <p className="text-xl font-black">StephisCode</p>
+              <p
+                className={`text-xs font-bold ${
+                  darkMode ? "text-emerald-300" : "text-emerald-700"
+                }`}
+              >
+                Fullstack Software Engineer
+              </p>
+            </div>
+          </div>
 
-          <p className="text-sm sm:text-base text-gray-400">
-            Building modern, responsive, and user-friendly web experiences.
+          <p
+            className={`mt-5 max-w-xl leading-7 ${
+              darkMode ? "text-zinc-400" : "text-slate-600"
+            }`}
+          >
+            Building modern digital products with sharp interfaces, reliable
+            APIs, mobile app thinking, and the kind of polish that makes a
+            portfolio feel alive.
           </p>
-          <div className="flex flex-wrap sm:flex-nowrap space-x-3 sm:space-x-4 mt-2 gap-2">
-            <a
-              href="https://github.com/stephiscode"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-emerald-400 transition"
-            >
-              <FaGithub size={20} sm={24} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/stephen-okeke-405569331/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-emerald-400 transition"
-            >
-              <FaLinkedin size={20} sm={24} />
-            </a>
-            <a
-              href="mailto:Okekeestephbliss@gmail.com"
-              className="hover:text-emerald-400 transition"
-            >
-              <FaEnvelope size={20} sm={24} />
-            </a>
+        </div>
+
+        <div>
+          <h3 className="mb-4 text-sm font-black">
+            Navigate
+          </h3>
+          <div className="grid gap-3">
+            {links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className={`inline-flex items-center gap-2 text-sm font-bold transition ${
+                  darkMode
+                    ? "text-zinc-400 hover:text-emerald-300"
+                    : "text-slate-600 hover:text-emerald-700"
+                }`}
+              >
+                {link.label}
+                <ArrowUpRight size={14} />
+              </a>
+            ))}
           </div>
         </div>
 
-        <div className="flex flex-col space-y-2">
-          <h3 className="font-semibold text-lg sm:text-xl mb-2">Quick Links</h3>
-          <a href="#home" className="hover:text-emerald-400 transition text-sm sm:text-base">
-            Home
-          </a>
-          <a href="#about" className="hover:text-emerald-400 transition text-sm sm:text-base">
-            About
-          </a>
-          <a href="#projects" className="hover:text-emerald-400 transition text-sm sm:text-base">
-            Projects
-          </a>
-          <a href="#contact" className="hover:text-emerald-400 transition text-sm sm:text-base">
-            Contact
-          </a>
-        </div>
+        <div>
+          <h3 className="mb-4 text-sm font-black">
+            Connect
+          </h3>
+          <div className="flex flex-wrap gap-3">
+            {socials.map((social) => {
+              const Icon = social.icon;
 
-        <div className="flex flex-col space-y-2">
-          <h3 className="font-semibold text-lg sm:text-xl mb-2">Stay Updated</h3>
-          <p className="text-sm sm:text-base text-gray-400">
-            Subscribe to get updates on my latest projects and blog posts.
-          </p>
-          <form className="flex flex-col sm:flex-row gap-2 mt-2 w-full">
-            <input
-              type="email"
-              placeholder="Your Email"
-              className="p-2 sm:p-3 rounded-md border border-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 flex-1 text-sm sm:text-base"
-            />
-            <button
-              type="submit"
-              className="mt-2 sm:mt-0 px-4 py-2 sm:py-3 bg-emerald-500 text-black rounded-md hover:bg-emerald-600 transition font-semibold text-sm sm:text-base"
-            >
-              Subscribe
-            </button>
-          </form>
+              return (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target={social.href.startsWith("mailto:") ? undefined : "_blank"}
+                  rel={
+                    social.href.startsWith("mailto:")
+                      ? undefined
+                      : "noopener noreferrer"
+                  }
+                  aria-label={social.label}
+                  className={`flex h-11 w-11 items-center justify-center rounded-full border transition ${
+                    darkMode
+                      ? "border-white/10 bg-white/5 text-zinc-300 hover:border-emerald-300/40 hover:text-emerald-300"
+                      : "border-slate-200 bg-slate-50 text-slate-700 hover:border-emerald-500/40 hover:text-emerald-700"
+                  }`}
+                >
+                  <Icon />
+                </a>
+              );
+            })}
+          </div>
+          <a
+            href="mailto:Stephiscode@gmail.com"
+            className="mt-5 inline-flex items-center gap-2 rounded-full bg-emerald-300 px-4 py-2 text-sm font-black text-zinc-950 transition hover:bg-emerald-200"
+          >
+            <Mail size={16} />
+            Email me
+          </a>
         </div>
       </div>
 
-      <div className="mt-12 border-t border-gray-700 pt-4 text-center text-sm sm:text-base text-gray-400">
-        © 2025 StephisCode | All Rights Reserved
+      <div
+        className={`mx-auto mt-10 max-w-7xl border-t pt-5 text-sm ${
+          darkMode
+            ? "border-white/10 text-zinc-500"
+            : "border-slate-200 text-slate-500"
+        }`}
+      >
+        (c) {year} StephisCode. All rights reserved.
       </div>
     </footer>
   );

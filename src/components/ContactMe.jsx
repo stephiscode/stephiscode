@@ -1,136 +1,302 @@
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { useState } from "react";
+import {
+  ArrowUpRight,
+  CheckCircle2,
+  Loader2,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Send,
+  ShieldCheck,
+} from "lucide-react";
+import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+
+const contactLinks = [
+  {
+    label: "GitHub",
+    value: "github.com/stephiscode",
+    href: "https://github.com/stephiscode",
+    icon: FaGithub,
+  },
+  {
+    label: "LinkedIn",
+    value: "Connect professionally",
+    href: "https://www.linkedin.com/in/stephen-okeke-405569331/",
+    icon: FaLinkedin,
+  },
+  {
+    label: "Email",
+    value: "Stephiscode@gmail.com",
+    href: "mailto:Stephiscode@gmail.com",
+    icon: FaEnvelope,
+  },
+];
 
 function ContactMe({ darkMode }) {
-  const [status, setStatus] = useState(""); 
+  const [status, setStatus] = useState("");
+  const [isSending, setIsSending] = useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    setIsSending(true);
+    setStatus("");
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   return (
     <section
       id="contact"
-      className={`w-full min-h-screen px-4 sm:px-6 md:px-16 py-16 flex flex-col items-center justify-center transition-colors duration-500 ${
-        darkMode ? "bg-black text-white" : "bg-white text-black"
+      className={`px-4 py-20 sm:px-6 lg:px-8 ${
+        darkMode ? "bg-zinc-900 text-white" : "bg-slate-100 text-slate-950"
       }`}
     >
-      <h2 
-        className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center mb-12"
-        data-aos="fade-down"
-      >
-        Contact <span className="text-emerald-400">Me</span>
-      </h2>
+      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+        <div data-aos="fade-up">
+          <div
+            className={`mb-5 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-black ${
+              darkMode
+                ? "border-cyan-300/20 bg-cyan-300/10 text-cyan-200"
+                : "border-cyan-600/20 bg-white text-cyan-800"
+            }`}
+          >
+            <MessageSquare size={16} />
+            Let&apos;s build
+          </div>
 
-      <p 
-        className="text-center max-w-md sm:max-w-xl md:max-w-2xl text-base sm:text-lg mb-8"
-        data-aos="fade-up"
-      >
-        I will love to hear from you! Feel free to reach out via email or connect
-        with me on GitHub and LinkedIn.
-      </p>
+          <h2 className="text-balance text-4xl font-black sm:text-5xl">
+            Need a developer who can move from idea to shipped product?
+          </h2>
+          <p
+            className={`mt-6 text-lg leading-8 ${
+              darkMode ? "text-zinc-300" : "text-slate-700"
+            }`}
+          >
+            Available for freelance work, web apps, mobile apps, dashboards,
+            APIs, and product collaboration.
+          </p>
 
-      <div 
-        className="flex flex-wrap justify-center space-x-4 sm:space-x-6 mb-8 gap-4"
-        data-aos="fade-up"
-        data-aos-delay="100"
-      >
-        <a
-          href="https://github.com/stephiscode"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-2xl sm:text-3xl hover:text-emerald-400 transition"
+          <div className="mt-8 grid gap-4">
+            <div
+              className={`rounded-[1.75rem] border p-5 ${
+                darkMode
+                  ? "border-white/10 bg-white/[0.04]"
+                  : "border-slate-200 bg-white"
+              }`}
+            >
+              <div className="flex items-start gap-4">
+                <div className="rounded-2xl bg-emerald-300 p-3 text-zinc-950">
+                  <ShieldCheck size={22} />
+                </div>
+                <div>
+                  <p className="font-black">Available for focused work</p>
+                  <p
+                    className={`mt-1 text-sm leading-6 ${
+                      darkMode ? "text-zinc-400" : "text-slate-600"
+                    }`}
+                  >
+                    Portfolio upgrades, React apps, React Native apps,
+                    dashboards, APIs, and fullstack product builds.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className={`rounded-[1.75rem] border p-5 ${
+                darkMode
+                  ? "border-white/10 bg-white/[0.04]"
+                  : "border-slate-200 bg-white"
+              }`}
+            >
+              <div className="flex items-start gap-4">
+                <div className="rounded-2xl bg-amber-300 p-3 text-zinc-950">
+                  <MapPin size={22} />
+                </div>
+                <div>
+                  <p className="font-black">Remote-ready</p>
+                  <p
+                    className={`mt-1 text-sm leading-6 ${
+                      darkMode ? "text-zinc-400" : "text-slate-600"
+                    }`}
+                  >
+                    Clear communication, fast iteration, and a product-minded
+                    approach from start to finish.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 grid gap-3">
+            {contactLinks.map((link) => {
+              const Icon = link.icon;
+
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+                  rel={
+                    link.href.startsWith("mailto:")
+                      ? undefined
+                      : "noopener noreferrer"
+                  }
+                  className={`group flex items-center justify-between rounded-2xl border p-4 transition ${
+                    darkMode
+                      ? "border-white/10 bg-zinc-950/50 hover:border-emerald-300/35"
+                      : "border-slate-200 bg-white hover:border-emerald-400"
+                  }`}
+                >
+                  <span className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-300 text-zinc-950">
+                      <Icon />
+                    </span>
+                    <span>
+                      <span className="block text-sm font-black">{link.label}</span>
+                      <span
+                        className={`block text-xs font-semibold ${
+                          darkMode ? "text-zinc-400" : "text-slate-500"
+                        }`}
+                      >
+                        {link.value}
+                      </span>
+                    </span>
+                  </span>
+                  <ArrowUpRight
+                    size={18}
+                    className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </a>
+              );
+            })}
+          </div>
+        </div>
+
+        <form
+          action="https://formspree.io/f/xgvlpalp"
+          method="POST"
+          onSubmit={handleSubmit}
+          className={`rounded-[2rem] border p-5 sm:p-8 ${
+            darkMode
+              ? "border-white/10 bg-zinc-950/80"
+              : "border-slate-300 bg-white text-slate-950 shadow-xl shadow-slate-200/80"
+          }`}
         >
-          <FaGithub />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/stephen-okeke-405569331/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-2xl sm:text-3xl hover:text-emerald-400 transition"
-        >
-          <FaLinkedin />
-        </a>
-        <a
-          href="mailto:Okekeestephbliss@gmail.com"
-          className="text-2xl sm:text-3xl hover:text-emerald-400 transition"
-        >
-          <FaEnvelope />
-        </a>
+          <div className="mb-8 flex items-start justify-between gap-4">
+            <div>
+              <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-300 text-zinc-950">
+                <Mail size={22} />
+              </div>
+              <h3 className="text-2xl font-black">Share your project details.</h3>
+              <p
+                className={`mt-2 text-sm leading-6 ${
+                  darkMode ? "text-zinc-400" : "text-slate-600"
+                }`}
+              >
+                Keep it short or give me the full idea. Either way, the inbox is
+                open.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label className="grid gap-2 text-sm font-black">
+              Name
+              <input
+                type="text"
+                name="name"
+                placeholder="Your name"
+                required
+                className={`rounded-2xl border px-4 py-3 text-sm outline-none transition focus:ring-2 focus:ring-emerald-300 ${
+                  darkMode
+                    ? "border-white/10 bg-white/5 text-white placeholder:text-zinc-500"
+                    : "border-slate-200 bg-slate-50 text-slate-950 placeholder:text-slate-400"
+                }`}
+              />
+            </label>
+
+            <label className="grid gap-2 text-sm font-black">
+              Email
+              <input
+                type="email"
+                name="email"
+                placeholder="you@email.com"
+                required
+                className={`rounded-2xl border px-4 py-3 text-sm outline-none transition focus:ring-2 focus:ring-emerald-300 ${
+                  darkMode
+                    ? "border-white/10 bg-white/5 text-white placeholder:text-zinc-500"
+                    : "border-slate-200 bg-slate-50 text-slate-950 placeholder:text-slate-400"
+                }`}
+              />
+            </label>
+          </div>
+
+          <label className="mt-4 grid gap-2 text-sm font-black">
+            Message
+            <textarea
+              name="message"
+              placeholder="Tell me about the project, role, timeline, or idea."
+              rows="7"
+              required
+              className={`resize-none rounded-2xl border px-4 py-3 text-sm outline-none transition focus:ring-2 focus:ring-emerald-300 ${
+                darkMode
+                  ? "border-white/10 bg-white/5 text-white placeholder:text-zinc-500"
+                  : "border-slate-200 bg-slate-50 text-slate-950 placeholder:text-slate-400"
+              }`}
+            />
+          </label>
+
+          {status === "success" && (
+            <div className="mt-4 flex items-center gap-2 rounded-2xl border border-emerald-300/30 bg-emerald-300/10 px-4 py-3 text-sm font-black text-emerald-300">
+              <CheckCircle2 size={18} />
+              Message sent successfully.
+            </div>
+          )}
+
+          {status === "error" && (
+            <div className="mt-4 rounded-2xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm font-black text-red-300">
+              Message failed. Please try again or email me directly.
+            </div>
+          )}
+
+          <button
+            type="submit"
+            disabled={isSending}
+            className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-emerald-300 px-5 py-4 text-sm font-black text-zinc-950 transition hover:bg-emerald-200 disabled:cursor-not-allowed disabled:opacity-70"
+          >
+            {isSending ? (
+              <>
+                <Loader2 size={18} className="animate-spin" />
+                Sending
+              </>
+            ) : (
+              <>
+                Send Message
+                <Send size={18} />
+              </>
+            )}
+          </button>
+        </form>
       </div>
-
-      {status === "success" && (
-        <p 
-          className="mb-4 text-green-500 font-semibold"
-          data-aos="fade-in"
-        >
-          Message sent successfully!
-        </p>
-      )}
-      {status === "error" && (
-        <p 
-          className="mb-4 text-red-500 font-semibold"
-          data-aos="fade-in"
-        >
-          Failed to send message. Try again.
-        </p>
-      )}
-
-      <form
-        data-aos="fade-up"
-        data-aos-delay="200"
-        action="https://formspree.io/f/xgvlpalp" 
-        method="POST"
-        onSubmit={(e) => {
-          e.preventDefault();
-          const form = e.target;
-          fetch(form.action, {
-            method: "POST",
-            body: new FormData(form),
-            headers: { Accept: "application/json" },
-          })
-            .then((response) => {
-              if (response.ok) {
-                setStatus("success");
-                form.reset();
-              } else {
-                setStatus("error");
-              }
-            })
-            .catch(() => setStatus("error"));
-        }}
-        className="w-full max-w-md sm:max-w-lg md:max-w-xl flex flex-col gap-4"
-      >
-        <input
-          type="text"
-          name="name"
-          placeholder="Your Name"
-          required
-          className={`p-3 sm:p-4 rounded border focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm sm:text-base ${
-            darkMode ? "bg-gray-800 text-white border-gray-700" : "bg-gray-100 text-black border-gray-300"
-          }`}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Your Email"
-          required
-          className={`p-3 sm:p-4 rounded border focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm sm:text-base ${
-            darkMode ? "bg-gray-800 text-white border-gray-700" : "bg-gray-100 text-black border-gray-300"
-          }`}
-        />
-        <textarea
-          name="message"
-          placeholder="Your Message"
-          rows="5"
-          required
-          className={`p-3 sm:p-4 rounded border focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm sm:text-base ${
-            darkMode ? "bg-gray-800 text-white border-gray-700" : "bg-gray-100 text-black border-gray-300"
-          }`}
-        />
-        <button
-          type="submit"
-          className="bg-emerald-500 text-black font-bold rounded py-3 sm:py-3.5 text-sm sm:text-base hover:bg-emerald-600 transition"
-        >
-          Send Message
-        </button>
-      </form>
     </section>
   );
 }
