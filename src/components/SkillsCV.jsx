@@ -112,7 +112,7 @@ function SkillsCV({ darkMode }) {
             </p>
             <a
               href={okeke}
-              download
+              download="Okeke-Stephen-Resume.pdf"
               className="mt-5 inline-flex items-center gap-2 rounded-full bg-emerald-300 px-5 py-3 text-sm font-black text-zinc-950 transition hover:bg-emerald-200"
             >
               <Download size={16} />

@@ -119,7 +119,7 @@ function NavBar({ darkMode, setDarkMode }) {
         <div className="flex items-center gap-2">
           <a
             href={okeke}
-            download
+            download="Okeke-Stephen-Resume.pdf"
             className={`hidden items-center gap-2 rounded-full px-4 py-2 text-sm font-black transition sm:flex ${
               darkMode
                 ? "bg-emerald-300 text-zinc-950 hover:bg-emerald-200"
@@ -190,7 +190,7 @@ function NavBar({ darkMode, setDarkMode }) {
             })}
             <a
               href={okeke}
-              download
+              download="Okeke-Stephen-Resume.pdf"
               className="mt-2 flex items-center justify-center gap-2 rounded-2xl bg-emerald-300 px-4 py-3 text-sm font-black text-zinc-950"
             >
               <Download size={16} />

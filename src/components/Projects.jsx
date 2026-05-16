@@ -3,14 +3,14 @@ import {
   BadgeCheck,
   ExternalLink,
   FolderKanban,
-  Gauge,
-  Layers3,
   Rocket,
   ShieldCheck,
   Smartphone,
 } from "lucide-react";
-import { FaGithub } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
+import doQueueLogo from "../images/project-icons/doqueue-logo.svg";
+import quintLogo from "../images/project-icons/quint-icon.png";
+import trackMoniLogo from "../images/project-icons/trackmoni-logo.svg";
 
 const projects = [
   {
@@ -20,7 +20,8 @@ const projects = [
       "A personal finance product for tracking income, expenses, analytics, and money decisions through a clean dashboard experience.",
     live: "https://www.trackmoni.online/",
     accent: "bg-emerald-300",
-    icon: Gauge,
+    logo: trackMoniLogo,
+    logoAlt: "TrackMoni logo",
     highlights: [
       "Dashboard and analytics experience",
       "Typed product architecture",
@@ -35,13 +36,30 @@ const projects = [
       "A task management app focused on helping users organize daily work, stay clear on priorities, and move through tasks faster.",
     live: "https://do-queue-steel.vercel.app/",
     accent: "bg-cyan-300",
-    icon: Layers3,
+    logo: doQueueLogo,
+    logoAlt: "DoQueue logo",
     highlights: [
       "Responsive task interface",
       "Fast interaction patterns",
       "Focused product workflow",
     ],
     tech: ["React", "JavaScript", "CSS", "Vercel"],
+  },
+  {
+    name: "Quint Dynamics Trading Academy",
+    role: "Forex academy reboot",
+    description:
+      "A Forex education academy platform focused on trading programs, clear learning paths, and a polished brand experience.",
+    live: "https://www.quintdynamicsacademy.com/",
+    accent: "bg-amber-300",
+    logo: quintLogo,
+    logoAlt: "Quint Dynamics Trading Academy logo",
+    highlights: [
+      "Academy-focused landing flow",
+      "Course and mentorship positioning",
+      "Responsive brand experience",
+    ],
+    tech: ["React", "Tailwind", "Education", "Brand UI"],
   },
 ];
 
@@ -71,7 +89,7 @@ const standards = [
 function Projects({ darkMode }) {
   const location = useLocation();
   const isAllProjectsPage = location.pathname === "/projects";
-  const visibleProjects = isAllProjectsPage ? projects : projects.slice(0, 2);
+  const visibleProjects = isAllProjectsPage ? projects : projects.slice(0, 3);
 
   return (
     <section
@@ -103,8 +121,6 @@ function Projects({ darkMode }) {
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {visibleProjects.map((project, index) => {
-            const Icon = project.icon;
-
             return (
               <article
                 key={project.name}
@@ -118,9 +134,13 @@ function Projects({ darkMode }) {
               >
                 <div className="mb-6 flex items-start justify-between gap-4">
                   <div
-                    className={`flex h-14 w-14 items-center justify-center rounded-2xl ${project.accent} text-zinc-950`}
+                    className={`flex h-14 w-14 items-center justify-center rounded-2xl ${project.accent}`}
                   >
-                    <Icon size={25} />
+                    <img
+                      src={project.logo}
+                      alt={project.logoAlt}
+                      className="h-10 w-10 object-contain"
+                    />
                   </div>
                   <a
                     href={project.live}
@@ -196,19 +216,6 @@ function Projects({ darkMode }) {
                   >
                     Live Product
                     <ExternalLink size={15} />
-                  </a>
-                  <a
-                    href="https://github.com/stephiscode"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-black transition ${
-                      darkMode
-                        ? "border-white/10 bg-white/5 hover:bg-white/10"
-                        : "border-slate-300 bg-white hover:bg-slate-100"
-                    }`}
-                  >
-                    GitHub
-                    <FaGithub size={15} />
                   </a>
                 </div>
               </article>
