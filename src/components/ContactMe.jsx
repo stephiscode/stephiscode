@@ -71,16 +71,7 @@ function ContactMe({ darkMode }) {
     >
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr]">
         <div data-aos="fade-up">
-          <div
-            className={`mb-5 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-black ${
-              darkMode
-                ? "border-cyan-300/20 bg-cyan-300/10 text-cyan-200"
-                : "border-cyan-600/20 bg-white text-cyan-800"
-            }`}
-          >
-            <MessageSquare size={16} />
-            Let&apos;s build
-          </div>
+          
 
           <h2 className="text-balance text-4xl font-black sm:text-5xl">
             Need a developer who can move from idea to shipped product?

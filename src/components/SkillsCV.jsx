@@ -77,16 +77,7 @@ function SkillsCV({ darkMode }) {
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div data-aos="fade-up">
-            <div
-              className={`mb-5 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-black ${
-                darkMode
-                  ? "border-amber-300/20 bg-amber-300/10 text-amber-200"
-                  : "border-amber-600/20 bg-amber-50 text-amber-800"
-              }`}
-            >
-              <Code2 size={16} />
-              Engineering stack
-            </div>
+            
             <h2 className="max-w-3xl text-balance text-4xl font-black sm:text-5xl">
               A toolkit for building complete products across interface,
               mobile, backend, and data.

@@ -5,6 +5,7 @@ import {
   Database,
   Gauge,
   ServerCog,
+  ShieldCheck,
   Smartphone,
   Workflow,
 } from "lucide-react";
@@ -60,16 +61,7 @@ function AboutMe({ darkMode }) {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div data-aos="fade-up">
-            <div
-              className={`mb-5 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-black ${
-                darkMode
-                  ? "border-cyan-300/20 bg-cyan-300/10 text-cyan-200"
-                  : "border-cyan-600/20 bg-cyan-50 text-cyan-800"
-              }`}
-            >
-              <Workflow size={16} />
-              Systems, screens, and shipping
-            </div>
+            
 
             <h2 className="max-w-3xl text-balance text-4xl font-black sm:text-5xl">
               A fullstack software engineer who can own the flow end to end.

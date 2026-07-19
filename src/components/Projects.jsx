@@ -29,38 +29,7 @@ const projects = [
     ],
     tech: ["Next.js", "TypeScript", "Tailwind", "Recharts"],
   },
-  {
-    name: "DoQueue",
-    role: "Task workflow application",
-    description:
-      "A task management app focused on helping users organize daily work, stay clear on priorities, and move through tasks faster.",
-    live: "https://do-queue-steel.vercel.app/",
-    accent: "bg-cyan-300",
-    logo: doQueueLogo,
-    logoAlt: "DoQueue logo",
-    highlights: [
-      "Responsive task interface",
-      "Fast interaction patterns",
-      "Focused product workflow",
-    ],
-    tech: ["React", "JavaScript", "CSS", "Vercel"],
-  },
-  {
-    name: "Quint Dynamics Trading Academy",
-    role: "Forex academy reboot",
-    description:
-      "A Forex education academy platform focused on trading programs, clear learning paths, and a polished brand experience.",
-    live: "https://www.quintdynamicsacademy.com/",
-    accent: "bg-amber-300",
-    logo: quintLogo,
-    logoAlt: "Quint Dynamics Trading Academy logo",
-    highlights: [
-      "Academy-focused landing flow",
-      "Course and mentorship positioning",
-      "Responsive brand experience",
-    ],
-    tech: ["React", "Tailwind", "Education", "Brand UI"],
-  },
+  
 ];
 
 const standards = [
@@ -101,16 +70,7 @@ function Projects({ darkMode }) {
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div data-aos="fade-up">
-            <div
-              className={`mb-5 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-black ${
-                darkMode
-                  ? "border-emerald-300/20 bg-emerald-300/10 text-emerald-200"
-                  : "border-emerald-600/20 bg-white text-emerald-800"
-              }`}
-            >
-              <FolderKanban size={16} />
-              {isAllProjectsPage ? "All projects" : "Featured builds"}
-            </div>
+
             <h2 className="max-w-3xl text-balance text-4xl font-extrabold sm:text-5xl">
               {isAllProjectsPage
                 ? "A growing collection of products, experiments, and client-ready builds."

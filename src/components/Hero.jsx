@@ -97,16 +97,7 @@ function Hero({ darkMode }) {
 
       <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1fr_0.92fr]">
         <div data-aos="fade-up">
-          <div
-            className={`mb-5 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold ${
-              darkMode
-                ? "border-emerald-300/25 bg-emerald-300/10 text-emerald-200"
-                : "border-emerald-600/20 bg-white text-emerald-800 shadow-sm"
-            }`}
-          >
-            <Sparkles size={16} />
-            Fullstack Software Engineer
-          </div>
+          
 
           <h1 className="max-w-3xl text-balance text-4xl font-extrabold leading-[1.06] sm:text-5xl lg:text-6xl">
             Premium digital products across web, mobile, and backend systems.
