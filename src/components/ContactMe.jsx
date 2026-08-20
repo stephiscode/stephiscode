@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   ArrowUpRight,
+  AlertCircle,
   CheckCircle2,
   Loader2,
   Mail,
@@ -33,25 +34,42 @@ const contactLinks = [
 ];
 
 function ContactMe({ darkMode }) {
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("idle");
   const [isSending, setIsSending] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const message = formData.get("message");
-    const subject = encodeURIComponent(`Project inquiry from ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\n${message}`,
-    );
+    const endpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT;
 
     setIsSending(true);
-    setStatus("success");
-    window.location.href = `mailto:Stephiscode@gmail.com?subject=${subject}&body=${body}`;
-    window.setTimeout(() => setIsSending(false), 400);
+    setStatus("idle");
+
+    try {
+      if (!endpoint) {
+        throw new Error("The contact form endpoint is not configured.");
+      }
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Formspree could not deliver the message.");
+      }
+
+      form.reset();
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -153,8 +171,22 @@ function ContactMe({ darkMode }) {
 
         <form
           onSubmit={handleSubmit}
+          onChange={() => status !== "idle" && setStatus("idle")}
           className="rounded-[2rem] border border-[#E1DDD6] bg-white p-5 shadow-[0_28px_80px_rgba(15,23,42,0.10)] sm:p-8"
         >
+          <input
+            type="text"
+            name="_gotcha"
+            tabIndex="-1"
+            autoComplete="off"
+            className="hidden"
+            aria-hidden="true"
+          />
+          <input
+            type="hidden"
+            name="_subject"
+            value="New project inquiry from Stephiscode"
+          />
           <div className="mb-8 flex items-start justify-between gap-4">
             <div>
               <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0F172A] text-white">
@@ -207,9 +239,41 @@ function ContactMe({ darkMode }) {
           </label>
 
           {status === "success" && (
-            <div className="mt-4 flex items-center gap-2 rounded-2xl border border-[#2E5E4E]/30 bg-[#2E5E4E]/10 px-4 py-3 text-sm font-black text-[#2E5E4E]">
-              <CheckCircle2 size={18} />
-              Your email app should open with the message ready.
+            <div
+              role="status"
+              aria-live="polite"
+              className="mt-4 flex animate-[contactFeedbackIn_300ms_ease-out] items-start gap-3 rounded-2xl border border-[#2E5E4E]/30 bg-[#2E5E4E]/10 px-4 py-3.5 text-[#2E5E4E] shadow-[0_12px_30px_rgba(46,94,78,0.10)]"
+            >
+              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#2E5E4E] text-white">
+                <CheckCircle2 size={16} strokeWidth={2.5} />
+              </span>
+              <span>
+                <span className="block text-sm font-black">
+                  Message sent successfully.
+                </span>
+                <span className="mt-0.5 block text-xs font-semibold leading-5 text-[#2E5E4E]/80">
+                  Thank you for reaching out. I will get back to you shortly.
+                </span>
+              </span>
+            </div>
+          )}
+
+          {status === "error" && (
+            <div
+              role="alert"
+              className="mt-4 flex animate-[contactFeedbackIn_300ms_ease-out] items-start gap-3 rounded-2xl border border-[#C65D3D]/30 bg-[#C65D3D]/10 px-4 py-3.5 text-[#9F4329] shadow-[0_12px_30px_rgba(198,93,61,0.10)]"
+            >
+              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#C65D3D] text-white">
+                <AlertCircle size={16} strokeWidth={2.5} />
+              </span>
+              <span>
+                <span className="block text-sm font-black">
+                  Your message was not sent.
+                </span>
+                <span className="mt-0.5 block text-xs font-semibold leading-5 text-[#9F4329]/80">
+                  Please check your connection and try again.
+                </span>
+              </span>
             </div>
           )}
 
@@ -221,7 +285,7 @@ function ContactMe({ darkMode }) {
             {isSending ? (
               <>
                 <Loader2 size={18} className="animate-spin" />
-                Preparing
+                Sending Message
               </>
             ) : (
               <>
