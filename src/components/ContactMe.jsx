@@ -35,6 +35,7 @@ const contactLinks = [
 
 function ContactMe({ darkMode }) {
   const [status, setStatus] = useState("idle");
+  const [errorMessage, setErrorMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -45,6 +46,7 @@ function ContactMe({ darkMode }) {
 
     setIsSending(true);
     setStatus("idle");
+    setErrorMessage("");
 
     try {
       if (!endpoint) {
@@ -58,14 +60,27 @@ function ContactMe({ darkMode }) {
           Accept: "application/json",
         },
       });
+      const result = await response.json().catch(() => null);
 
       if (!response.ok) {
-        throw new Error("Formspree could not deliver the message.");
+        const formspreeMessage = result?.errors
+          ?.map((error) => error.message)
+          .filter(Boolean)
+          .join(" ");
+
+        throw new Error(
+          formspreeMessage || "Formspree could not deliver the message.",
+        );
       }
 
       form.reset();
       setStatus("success");
-    } catch {
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Please check your connection and try again.",
+      );
       setStatus("error");
     } finally {
       setIsSending(false);
@@ -171,7 +186,12 @@ function ContactMe({ darkMode }) {
 
         <form
           onSubmit={handleSubmit}
-          onChange={() => status !== "idle" && setStatus("idle")}
+          onChange={() => {
+            if (status !== "idle") {
+              setStatus("idle");
+              setErrorMessage("");
+            }
+          }}
           className="rounded-[2rem] border border-[#E1DDD6] bg-white p-5 shadow-[0_28px_80px_rgba(15,23,42,0.10)] sm:p-8"
         >
           <input
@@ -271,7 +291,7 @@ function ContactMe({ darkMode }) {
                   Your message was not sent.
                 </span>
                 <span className="mt-0.5 block text-xs font-semibold leading-5 text-[#9F4329]/80">
-                  Please check your connection and try again.
+                  {errorMessage}
                 </span>
               </span>
             </div>
