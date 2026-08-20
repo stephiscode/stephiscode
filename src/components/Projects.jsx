@@ -1,104 +1,97 @@
+import { useState } from "react";
 import {
   ArrowUpRight,
   BadgeCheck,
+  ChevronDown,
+  Database,
   ExternalLink,
-  FolderKanban,
-  Rocket,
+  Gauge,
   ShieldCheck,
   Smartphone,
 } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
-import doQueueLogo from "../images/project-icons/doqueue-logo.svg";
-import quintLogo from "../images/project-icons/quint-icon.png";
+
 import trackMoniLogo from "../images/project-icons/trackmoni-logo.svg";
 
-const projects = [
-  {
-    name: "TrackMoni",
-    role: "Fullstack finance platform",
-    description:
-      "A personal finance product for tracking income, expenses, analytics, and money decisions through a clean dashboard experience.",
-    live: "https://www.trackmoni.online/",
-    accent: "bg-emerald-300",
-    logo: trackMoniLogo,
-    logoAlt: "TrackMoni logo",
-    highlights: [
-      "Dashboard and analytics experience",
-      "Typed product architecture",
-      "Data-focused money workflows",
-    ],
-    tech: ["Next.js", "TypeScript", "Tailwind", "Recharts"],
-  },
-  
-];
+const projects = [{
+  id: "trackmoni",
+  name: "TrackMoni",
+  live: "https://www.trackmoni.online/",
+  logo: trackMoniLogo,
+  description:
+    "An expense tracker and personal finance dashboard built to help users understand income, expenses, bills, and money movement from one clean product.",
+  highlights: [
+    "Expense, income, bills, and transaction workflows",
+    "Dashboard summaries and analytics for money decisions",
+    "Installable PWA experience for app-like access",
+  ],
+  stack: ["Next.js", "TypeScript", "Prisma", "Recharts", "PWA", "API routes"],
+}];
 
-const standards = [
+const INITIAL_PROJECT_COUNT = 6;
+
+const breakdown = [
   {
-    title: "Interface polish",
-    icon: BadgeCheck,
-    copy: "Readable screens, strong hierarchy, and UI states that make every action feel clear.",
+    title: "Problem",
+    icon: Gauge,
+    copy: "People need a simple way to understand where their money is going without depending on scattered notes or spreadsheets.",
   },
   {
-    title: "Fullstack thinking",
-    icon: Rocket,
-    copy: "Frontend decisions connected to backend data, performance, mobile flows, and deployment needs.",
+    title: "Build",
+    icon: Database,
+    copy: "TrackMoni organizes financial activity into authenticated dashboards, summaries, transaction history, bill flows, and data-backed views.",
   },
   {
-    title: "Mobile awareness",
+    title: "Product detail",
     icon: Smartphone,
-    copy: "Product decisions that can stretch cleanly from browser experiences into React Native apps.",
+    copy: "The PWA feature gives it a more app-like feel, so users can access the product more naturally from their device.",
   },
   {
-    title: "Production sense",
+    title: "Impact",
     icon: ShieldCheck,
-    copy: "Clean structure, scalable patterns, and practical details a real project needs.",
+    copy: "The product helps users see patterns, manage expenses, and make better financial decisions with less friction.",
   },
 ];
 
 function Projects({ darkMode }) {
-  const location = useLocation();
-  const isAllProjectsPage = location.pathname === "/projects";
-  const visibleProjects = isAllProjectsPage ? projects : projects.slice(0, 3);
+  const [expandedProject, setExpandedProject] = useState(null);
+  const [showAll, setShowAll] = useState(false);
+  const visibleProjects = showAll
+    ? projects
+    : projects.slice(0, INITIAL_PROJECT_COUNT);
+  const selectedProject = projects.find(
+    (project) => project.id === expandedProject,
+  );
 
   return (
     <section
       id="projects"
       className={`px-4 py-20 sm:px-6 lg:px-8 ${
-        darkMode ? "bg-zinc-900 text-white" : "bg-slate-100 text-slate-950"
+        darkMode ? "bg-[#F7F4ED]" : "bg-white"
       }`}
     >
       <div className="mx-auto max-w-7xl">
-        <div className="mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-          <div data-aos="fade-up">
-
-            <h2 className="max-w-3xl text-balance text-4xl font-extrabold sm:text-5xl">
-              {isAllProjectsPage
-                ? "A growing collection of products, experiments, and client-ready builds."
-                : "Selected products with clean interfaces and reliable engineering."}
-            </h2>
-          </div>
+        <div className="mb-10" data-aos="fade-up">
+          <h2 className="text-balance text-4xl font-black leading-tight text-[#0F172A] sm:text-5xl">
+            Projects
+          </h2>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {visibleProjects.map((project, index) => {
+            const expanded = expandedProject === project.id;
+
             return (
               <article
-                key={project.name}
-                className={`group rounded-[2rem] border p-5 transition hover:-translate-y-1 ${
-                  darkMode
-                    ? "border-white/10 bg-zinc-950/80 hover:border-emerald-300/35"
-                    : "border-slate-200 bg-white shadow-sm hover:border-emerald-400"
-                }`}
+                key={project.id}
+                className="flex min-h-[20rem] flex-col rounded-2xl border border-[#E1DDD6] bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#2E5E4E]/40 hover:shadow-[0_22px_60px_rgba(15,23,42,0.08)]"
                 data-aos="fade-up"
-                data-aos-delay={index * 120}
+                data-aos-delay={index * 80}
               >
-                <div className="mb-6 flex items-start justify-between gap-4">
-                  <div
-                    className={`flex h-14 w-14 items-center justify-center rounded-2xl ${project.accent}`}
-                  >
+                <div className="mb-7 flex items-start justify-between gap-4">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-[#E1DDD6] bg-[#F7F4ED]">
                     <img
                       src={project.logo}
-                      alt={project.logoAlt}
+                      alt={`${project.name} logo`}
                       className="h-10 w-10 object-contain"
                     />
                   </div>
@@ -106,75 +99,43 @@ function Projects({ darkMode }) {
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition ${
-                      darkMode
-                        ? "border-white/10 bg-white/5 hover:bg-white/10"
-                        : "border-slate-200 bg-slate-50 hover:bg-slate-100"
-                    }`}
+                    className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#E1DDD6] bg-white text-[#0F172A] transition hover:border-[#2E5E4E] hover:text-[#2E5E4E]"
                     aria-label={`Open ${project.name}`}
+                    title={`Open ${project.name}`}
                   >
                     <ArrowUpRight size={18} />
                   </a>
                 </div>
 
-                <p
-                  className={`mb-3 text-sm font-black ${
-                    darkMode ? "text-emerald-300" : "text-emerald-700"
-                  }`}
-                >
-                  {project.role}
-                </p>
-                <h3 className="text-2xl font-black">{project.name}</h3>
-                <p
-                  className={`mt-3 min-h-24 text-sm leading-6 ${
-                    darkMode ? "text-zinc-300" : "text-slate-700"
-                  }`}
-                >
+                <h3 className="text-2xl font-black text-[#0F172A]">
+                  {project.name}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-[#4B5563]">
                   {project.description}
                 </p>
 
-                <div className="mt-5 grid gap-2">
-                  {project.highlights.map((highlight) => (
-                    <div
-                      key={highlight}
-                      className={`flex items-center gap-3 rounded-2xl border px-3 py-2 text-sm font-bold ${
-                        darkMode
-                          ? "border-white/10 bg-white/[0.04]"
-                          : "border-slate-200 bg-slate-50"
-                      }`}
-                    >
-                      <BadgeCheck
-                        size={17}
-                        className="shrink-0 text-emerald-300"
-                      />
-                      {highlight}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className={`rounded-full border px-3 py-1.5 text-xs font-black ${
-                        darkMode
-                          ? "border-white/10 bg-white/[0.04] text-zinc-200"
-                          : "border-slate-200 bg-white text-slate-700"
-                      }`}
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="mt-auto flex flex-wrap gap-3 pt-7">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setExpandedProject(expanded ? null : project.id)
+                    }
+                    className="inline-flex items-center gap-2 rounded-full bg-[#0F172A] px-4 py-2.5 text-sm font-black text-white transition hover:bg-[#2E5E4E]"
+                    aria-expanded={expanded}
+                  >
+                    Learn more
+                    <ChevronDown
+                      size={16}
+                      className={`transition ${expanded ? "rotate-180" : ""}`}
+                    />
+                  </button>
                   <a
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-emerald-300 px-4 py-2.5 text-sm font-black text-zinc-950 transition hover:bg-emerald-200"
+                    className="inline-flex items-center gap-2 rounded-full border border-[#E1DDD6] bg-white px-4 py-2.5 text-sm font-black text-[#0F172A] transition hover:border-[#2E5E4E]"
                   >
-                    Live Product
+                    Visit site
                     <ExternalLink size={15} />
                   </a>
                 </div>
@@ -183,52 +144,111 @@ function Projects({ darkMode }) {
           })}
         </div>
 
-        {!isAllProjectsPage && (
+        {projects.length > INITIAL_PROJECT_COUNT && (
           <div className="mt-8 flex justify-center">
-            <Link
-              to="/projects"
-              className={`inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-black transition ${
-                darkMode
-                  ? "border-white/10 bg-white/5 text-white hover:bg-white/10"
-                  : "border-slate-300 bg-white text-slate-950 hover:bg-slate-100"
-              }`}
+            <button
+              type="button"
+              onClick={() => setShowAll(!showAll)}
+              className="inline-flex items-center gap-2 rounded-full border border-[#0F172A] bg-white px-5 py-3 text-sm font-black text-[#0F172A] transition hover:bg-[#0F172A] hover:text-white"
+              aria-expanded={showAll}
             >
-              Show All Projects
-              <ArrowUpRight size={17} />
-            </Link>
+              {showAll ? "Show fewer projects" : "See More Projects"}
+              <ChevronDown
+                size={17}
+                className={`transition ${showAll ? "rotate-180" : ""}`}
+              />
+            </button>
           </div>
         )}
 
-        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {standards.map((item, index) => {
-            const Icon = item.icon;
-
-            return (
-              <div
-                key={item.title}
-                className={`rounded-[1.75rem] border p-5 ${
-                  darkMode
-                    ? "border-white/10 bg-white/[0.04]"
-                    : "border-slate-200 bg-white shadow-sm"
-                }`}
-                data-aos="fade-up"
-                data-aos-delay={index * 80}
-              >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-300 text-zinc-950">
-                  <Icon size={22} />
-                </div>
-                <h3 className="text-lg font-black">{item.title}</h3>
-                <p
-                  className={`mt-2 text-sm leading-6 ${
-                    darkMode ? "text-zinc-400" : "text-slate-600"
-                  }`}
-                >
-                  {item.copy}
+        {selectedProject && (
+          <div
+            className="mt-6 rounded-2xl border border-[#E1DDD6] bg-[#F7F4ED] p-5 shadow-sm sm:p-6"
+            data-aos="fade-up"
+          >
+            <div className="mb-5 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+              <div>
+                <h3 className="text-2xl font-black text-[#0F172A]">
+                  {selectedProject.name} breakdown
+                </h3>
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-[#4B5563]">
+                  A quick look at what it solves, how it was built, and the
+                  product features behind it.
                 </p>
               </div>
-            );
-          })}
-        </div>
+              <a
+                href={selectedProject.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-[#2E5E4E] px-4 py-2.5 text-sm font-black text-white transition hover:bg-[#0F172A]"
+              >
+                Open product
+                <ExternalLink size={15} />
+              </a>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {breakdown.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <div
+                    key={item.title}
+                    className="rounded-[1.5rem] border border-[#E1DDD6] bg-white p-5"
+                  >
+                    <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#F7F4ED] text-[#2E5E4E] ring-1 ring-[#E1DDD6]">
+                      <Icon size={19} />
+                    </div>
+                    <h4 className="text-lg font-black text-[#0F172A]">
+                      {item.title}
+                    </h4>
+                    <p className="mt-2 text-sm leading-6 text-[#4B5563]">
+                      {item.copy}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_0.75fr]">
+              <div className="rounded-[1.5rem] border border-[#E1DDD6] bg-white p-5">
+                <p className="text-sm font-black uppercase tracking-[0.24em] text-[#2E5E4E]">
+                  Product features
+                </p>
+                <div className="mt-4 grid gap-3">
+                  {selectedProject.highlights.map((highlight) => (
+                    <div
+                      key={highlight}
+                      className="flex items-start gap-3 text-sm font-bold leading-6 text-[#0F172A]"
+                    >
+                      <BadgeCheck
+                        size={18}
+                        className="mt-0.5 shrink-0 text-[#2E5E4E]"
+                      />
+                      {highlight}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-[1.5rem] bg-[#0F172A] p-5 text-white">
+                <p className="text-sm font-black uppercase tracking-[0.24em] text-[#A7F3D0]">
+                  Stack used
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {selectedProject.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-black"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

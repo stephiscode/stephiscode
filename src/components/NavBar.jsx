@@ -13,14 +13,14 @@ import {
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import okeke from "../assets/Okeke.pdf";
-import StephLogo from "../images/stephiscode-icon-black.svg";
+import resume from "../assets/Stefiscode_Resume.pdf";
+import StephLogo from "../assets/new-stephiscode.PNG";
 
 const navItems = [
   { label: "Home", section: "home", icon: Home },
   { label: "About", section: "about", icon: UserRound },
-  { label: "Projects", section: "projects", icon: FolderKanban },
-  { label: "Skills", section: "skills", icon: Code2 },
+  { label: "Project", section: "projects", icon: FolderKanban },
+  { label: "Stack", section: "skills", icon: Code2 },
   { label: "Contact", section: "contact", icon: Mail },
 ];
 
@@ -50,8 +50,8 @@ function NavBar({ darkMode, setDarkMode }) {
     <header
       className={`sticky top-0 z-50 border-b backdrop-blur-2xl transition-colors duration-500 ${
         darkMode
-          ? "border-white/10 bg-zinc-950/80"
-          : "border-slate-200/80 bg-white/85"
+          ? "border-[#2E5E4E]/15 bg-[#F7F4ED]/90"
+          : "border-[#E1DDD6] bg-white/90"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
@@ -61,39 +61,17 @@ function NavBar({ darkMode, setDarkMode }) {
           className="group flex items-center gap-3"
           aria-label="Go to home"
         >
-          <span
-            className={`flex h-11 w-11 items-center justify-center rounded-2xl border ${
-              darkMode
-                ? "border-emerald-400/30 bg-white/5"
-                : "border-emerald-500/30 bg-emerald-50"
-            }`}
-          >
+          <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#E1DDD6] bg-white shadow-sm">
             <img
               src={StephLogo}
               alt="StephisCode logo"
-              className="h-8 w-8 object-contain"
+              className="h-9 w-9 object-contain"
             />
-          </span>
-          <span className="text-left leading-none">
-            <span className="block text-lg font-black sm:text-xl">
-              StephisCode
-            </span>
-            <span
-              className={`mt-1 hidden text-xs font-semibold sm:block ${
-                darkMode ? "text-emerald-300" : "text-emerald-700"
-              }`}
-            >
-              Fullstack Software Engineer
-            </span>
           </span>
         </button>
 
         <div
-          className={`hidden items-center gap-1 rounded-full border p-1 lg:flex ${
-            darkMode
-              ? "border-white/10 bg-white/[0.04]"
-              : "border-slate-200 bg-white shadow-sm"
-          }`}
+          className="hidden items-center gap-1 rounded-full border border-[#E1DDD6] bg-white p-1 shadow-sm lg:flex"
         >
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -103,11 +81,7 @@ function NavBar({ darkMode, setDarkMode }) {
                 key={item.section}
                 type="button"
                 onClick={() => handleNav(item.section)}
-                className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition ${
-                  darkMode
-                    ? "text-zinc-300 hover:bg-white/10 hover:text-white"
-                    : "text-slate-700 hover:bg-slate-100 hover:text-slate-950"
-                }`}
+                className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold text-[#4B5563] transition hover:bg-[#F7F4ED] hover:text-[#0F172A]"
               >
                 <Icon size={16} />
                 {item.label}
@@ -118,13 +92,9 @@ function NavBar({ darkMode, setDarkMode }) {
 
         <div className="flex items-center gap-2">
           <a
-            href={okeke}
-            download="Okeke-Stephen-Resume.pdf"
-            className={`hidden items-center gap-2 rounded-full px-4 py-2 text-sm font-black transition sm:flex ${
-              darkMode
-                ? "bg-emerald-300 text-zinc-950 hover:bg-emerald-200"
-                : "bg-zinc-950 text-white hover:bg-zinc-800"
-            }`}
+            href={resume}
+            download="Stefiscode_Resume.pdf"
+            className="hidden items-center gap-2 rounded-full bg-[#0F172A] px-4 py-2 text-sm font-black text-white transition hover:bg-[#2E5E4E] sm:flex"
           >
             <Download size={16} />
             Resume
@@ -135,8 +105,8 @@ function NavBar({ darkMode, setDarkMode }) {
             onClick={() => setDarkMode(!darkMode)}
             className={`flex h-10 w-10 items-center justify-center rounded-full border transition ${
               darkMode
-                ? "border-white/10 bg-white/5 text-amber-200 hover:bg-white/10"
-                : "border-slate-200 bg-white text-slate-900 hover:bg-slate-100"
+                ? "border-[#2E5E4E] bg-[#2E5E4E] text-white"
+                : "border-[#E1DDD6] bg-white text-[#0F172A] hover:border-[#2E5E4E]"
             }`}
             aria-label="Toggle theme"
           >
@@ -146,11 +116,7 @@ function NavBar({ darkMode, setDarkMode }) {
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className={`flex h-10 w-10 items-center justify-center rounded-full border transition lg:hidden ${
-              darkMode
-                ? "border-white/10 bg-white/5 hover:bg-white/10"
-                : "border-slate-200 bg-white hover:bg-slate-100"
-            }`}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E1DDD6] bg-white text-[#0F172A] transition hover:border-[#2E5E4E] lg:hidden"
             aria-label="Toggle navigation menu"
           >
             {menuOpen ? <X size={19} /> : <Menu size={19} />}
@@ -160,11 +126,7 @@ function NavBar({ darkMode, setDarkMode }) {
 
       {menuOpen && (
         <div
-          className={`border-t px-4 pb-4 lg:hidden ${
-            darkMode
-              ? "border-white/10 bg-zinc-950"
-              : "border-slate-200 bg-white"
-          }`}
+          className="border-t border-[#E1DDD6] bg-white px-4 pb-4 lg:hidden"
         >
           <div className="mx-auto grid max-w-7xl gap-2 pt-3">
             {navItems.map((item) => {
@@ -175,11 +137,7 @@ function NavBar({ darkMode, setDarkMode }) {
                   key={item.section}
                   type="button"
                   onClick={() => handleNav(item.section)}
-                  className={`flex items-center justify-between rounded-2xl px-4 py-3 text-left text-sm font-bold transition ${
-                    darkMode
-                      ? "bg-white/5 text-zinc-100 hover:bg-white/10"
-                      : "bg-slate-100 text-slate-900 hover:bg-slate-200"
-                  }`}
+                  className="flex items-center justify-between rounded-2xl bg-[#F7F4ED] px-4 py-3 text-left text-sm font-bold text-[#0F172A] transition hover:bg-[#E1DDD6]"
                 >
                   <span className="flex items-center gap-3">
                     <Icon size={17} />
@@ -189,9 +147,9 @@ function NavBar({ darkMode, setDarkMode }) {
               );
             })}
             <a
-              href={okeke}
-              download="Okeke-Stephen-Resume.pdf"
-              className="mt-2 flex items-center justify-center gap-2 rounded-2xl bg-emerald-300 px-4 py-3 text-sm font-black text-zinc-950"
+              href={resume}
+              download="Stefiscode_Resume.pdf"
+              className="mt-2 flex items-center justify-center gap-2 rounded-2xl bg-[#0F172A] px-4 py-3 text-sm font-black text-white"
             >
               <Download size={16} />
               Download Resume

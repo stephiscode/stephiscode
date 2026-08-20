@@ -4,8 +4,8 @@ import NavBar from "./NavBar";
 function Layout({ children, darkMode, setDarkMode }) {
   return (
     <div
-      className={`min-h-screen selection:bg-emerald-300 selection:text-zinc-950 ${
-        darkMode ? "bg-zinc-950 text-white" : "bg-slate-50 text-slate-950"
+      className={`min-h-screen selection:bg-[#2E5E4E] selection:text-white ${
+        darkMode ? "bg-[#F7F4ED] text-[#0F172A]" : "bg-white text-[#0F172A]"
       }`}
     >
       <NavBar darkMode={darkMode} setDarkMode={setDarkMode} />

@@ -1,0 +1,17 @@
+{
+  "name": "StephisCode - Build. Launch. Impact.",
+  "short_name": "StephisCode",
+  "description": "Fullstack software development, software engineering and product design from Lagos, Nigeria.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#2E5E4E",
+  "icons": [
+    {
+      "src": "/stephiscode-logo.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

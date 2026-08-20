@@ -4,10 +4,10 @@ import {
   CheckCircle2,
   Loader2,
   Mail,
-  MapPin,
   MessageSquare,
   Send,
   ShieldCheck,
+  Users,
 } from "lucide-react";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
@@ -36,101 +36,76 @@ function ContactMe({ darkMode }) {
   const [status, setStatus] = useState("");
   const [isSending, setIsSending] = useState(false);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.currentTarget;
+    const formData = new FormData(form);
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const message = formData.get("message");
+    const subject = encodeURIComponent(`Project inquiry from ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\n${message}`,
+    );
+
     setIsSending(true);
-    setStatus("");
-
-    try {
-      const response = await fetch(form.action, {
-        method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" },
-      });
-
-      if (response.ok) {
-        setStatus("success");
-        form.reset();
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    } finally {
-      setIsSending(false);
-    }
+    setStatus("success");
+    window.location.href = `mailto:Stephiscode@gmail.com?subject=${subject}&body=${body}`;
+    window.setTimeout(() => setIsSending(false), 400);
   };
 
   return (
     <section
       id="contact"
       className={`px-4 py-20 sm:px-6 lg:px-8 ${
-        darkMode ? "bg-zinc-900 text-white" : "bg-slate-100 text-slate-950"
+        darkMode ? "bg-white" : "bg-[#F7F4ED]"
       }`}
     >
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr]">
         <div data-aos="fade-up">
-          
+          <p className="mb-5 text-sm font-black uppercase tracking-[0.32em] text-[#2E5E4E]">
+            Build with me
+          </p>
 
-          <h2 className="text-balance text-4xl font-black sm:text-5xl">
-            Need a developer who can move from idea to shipped product?
+          <h2 className="text-balance text-4xl font-black leading-tight text-[#0F172A] sm:text-5xl">
+            Have an app idea, product problem, or client build?
           </h2>
-          <p
-            className={`mt-6 text-lg leading-8 ${
-              darkMode ? "text-zinc-300" : "text-slate-700"
-            }`}
-          >
-            Available for freelance work, web apps, mobile apps, dashboards,
-            APIs, and product collaboration.
+          <p className="mt-6 text-lg leading-8 text-[#4B5563]">
+            I am open to freelance work, SaaS collaboration, dashboards, mobile
+            app flows, APIs, and fullstack products that need both design sense
+            and engineering discipline.
           </p>
 
           <div className="mt-8 grid gap-4">
-            <div
-              className={`rounded-[1.75rem] border p-5 ${
-                darkMode
-                  ? "border-white/10 bg-white/[0.04]"
-                  : "border-slate-200 bg-white"
-              }`}
-            >
+            <div className="rounded-[1.75rem] border border-[#E1DDD6] bg-white p-5 shadow-sm">
               <div className="flex items-start gap-4">
-                <div className="rounded-2xl bg-emerald-300 p-3 text-zinc-950">
+                <div className="rounded-2xl bg-[#2E5E4E] p-3 text-white">
                   <ShieldCheck size={22} />
                 </div>
                 <div>
-                  <p className="font-black">Available for focused work</p>
-                  <p
-                    className={`mt-1 text-sm leading-6 ${
-                      darkMode ? "text-zinc-400" : "text-slate-600"
-                    }`}
-                  >
-                    Portfolio upgrades, React apps, React Native apps,
-                    dashboards, APIs, and fullstack product builds.
+                  <p className="font-black text-[#0F172A]">
+                    Product-minded development
+                  </p>
+                  <p className="mt-1 text-sm leading-6 text-[#4B5563]">
+                    From idea validation and UI direction to backend structure,
+                    launch details, and practical iteration.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div
-              className={`rounded-[1.75rem] border p-5 ${
-                darkMode
-                  ? "border-white/10 bg-white/[0.04]"
-                  : "border-slate-200 bg-white"
-              }`}
-            >
+            <div className="rounded-[1.75rem] border border-[#E1DDD6] bg-white p-5 shadow-sm">
               <div className="flex items-start gap-4">
-                <div className="rounded-2xl bg-amber-300 p-3 text-zinc-950">
-                  <MapPin size={22} />
+                <div className="rounded-2xl bg-[#C65D3D] p-3 text-white">
+                  <Users size={22} />
                 </div>
                 <div>
-                  <p className="font-black">Remote-ready</p>
-                  <p
-                    className={`mt-1 text-sm leading-6 ${
-                      darkMode ? "text-zinc-400" : "text-slate-600"
-                    }`}
-                  >
-                    Clear communication, fast iteration, and a product-minded
-                    approach from start to finish.
+                  <p className="font-black text-[#0F172A]">
+                    Client and collaboration ready
+                  </p>
+                  <p className="mt-1 text-sm leading-6 text-[#4B5563]">
+                    Clear communication, fast iteration, and a builder mindset
+                    for people who want to move from concept to shipped product.
                   </p>
                 </div>
               </div>
@@ -151,30 +126,24 @@ function ContactMe({ darkMode }) {
                       ? undefined
                       : "noopener noreferrer"
                   }
-                  className={`group flex items-center justify-between rounded-2xl border p-4 transition ${
-                    darkMode
-                      ? "border-white/10 bg-zinc-950/50 hover:border-emerald-300/35"
-                      : "border-slate-200 bg-white hover:border-emerald-400"
-                  }`}
+                  className="group flex items-center justify-between rounded-2xl border border-[#E1DDD6] bg-white p-4 transition hover:-translate-y-0.5 hover:border-[#2E5E4E]"
                 >
                   <span className="flex items-center gap-3">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-300 text-zinc-950">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F7F4ED] text-[#2E5E4E] ring-1 ring-[#E1DDD6]">
                       <Icon />
                     </span>
                     <span>
-                      <span className="block text-sm font-black">{link.label}</span>
-                      <span
-                        className={`block text-xs font-semibold ${
-                          darkMode ? "text-zinc-400" : "text-slate-500"
-                        }`}
-                      >
+                      <span className="block text-sm font-black text-[#0F172A]">
+                        {link.label}
+                      </span>
+                      <span className="block text-xs font-semibold text-[#4B5563]">
                         {link.value}
                       </span>
                     </span>
                   </span>
                   <ArrowUpRight
                     size={18}
-                    className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    className="text-[#2E5E4E] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                   />
                 </a>
               );
@@ -183,101 +152,76 @@ function ContactMe({ darkMode }) {
         </div>
 
         <form
-          action="https://formspree.io/f/xgvlpalp"
-          method="POST"
           onSubmit={handleSubmit}
-          className={`rounded-[2rem] border p-5 sm:p-8 ${
-            darkMode
-              ? "border-white/10 bg-zinc-950/80"
-              : "border-slate-300 bg-white text-slate-950 shadow-xl shadow-slate-200/80"
-          }`}
+          className="rounded-[2rem] border border-[#E1DDD6] bg-white p-5 shadow-[0_28px_80px_rgba(15,23,42,0.10)] sm:p-8"
         >
           <div className="mb-8 flex items-start justify-between gap-4">
             <div>
-              <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-300 text-zinc-950">
+              <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0F172A] text-white">
                 <Mail size={22} />
               </div>
-              <h3 className="text-2xl font-black">Share your project details.</h3>
-              <p
-                className={`mt-2 text-sm leading-6 ${
-                  darkMode ? "text-zinc-400" : "text-slate-600"
-                }`}
-              >
-                Keep it short or give me the full idea. Either way, the inbox is
-                open.
+              <h3 className="text-2xl font-black text-[#0F172A]">
+                Share the product details.
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[#4B5563]">
+                Send the idea, feature, timeline, or collaboration note. I will
+                read it like a builder, not just a form submission.
               </p>
             </div>
+            <MessageSquare size={22} className="hidden text-[#2E5E4E] sm:block" />
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <label className="grid gap-2 text-sm font-black">
+            <label className="grid gap-2 text-sm font-black text-[#0F172A]">
               Name
               <input
                 type="text"
                 name="name"
                 placeholder="Your name"
                 required
-                className={`rounded-2xl border px-4 py-3 text-sm outline-none transition focus:ring-2 focus:ring-emerald-300 ${
-                  darkMode
-                    ? "border-white/10 bg-white/5 text-white placeholder:text-zinc-500"
-                    : "border-slate-200 bg-slate-50 text-slate-950 placeholder:text-slate-400"
-                }`}
+                className="rounded-2xl border border-[#E1DDD6] bg-[#F7F4ED] px-4 py-3 text-sm text-[#0F172A] outline-none transition placeholder:text-[#4B5563]/60 focus:border-[#2E5E4E] focus:ring-2 focus:ring-[#2E5E4E]/15"
               />
             </label>
 
-            <label className="grid gap-2 text-sm font-black">
+            <label className="grid gap-2 text-sm font-black text-[#0F172A]">
               Email
               <input
                 type="email"
                 name="email"
                 placeholder="you@email.com"
                 required
-                className={`rounded-2xl border px-4 py-3 text-sm outline-none transition focus:ring-2 focus:ring-emerald-300 ${
-                  darkMode
-                    ? "border-white/10 bg-white/5 text-white placeholder:text-zinc-500"
-                    : "border-slate-200 bg-slate-50 text-slate-950 placeholder:text-slate-400"
-                }`}
+                className="rounded-2xl border border-[#E1DDD6] bg-[#F7F4ED] px-4 py-3 text-sm text-[#0F172A] outline-none transition placeholder:text-[#4B5563]/60 focus:border-[#2E5E4E] focus:ring-2 focus:ring-[#2E5E4E]/15"
               />
             </label>
           </div>
 
-          <label className="mt-4 grid gap-2 text-sm font-black">
+          <label className="mt-4 grid gap-2 text-sm font-black text-[#0F172A]">
             Message
             <textarea
               name="message"
-              placeholder="Tell me about the project, role, timeline, or idea."
+              placeholder="Tell me about the product, role, timeline, or idea."
               rows="7"
               required
-              className={`resize-none rounded-2xl border px-4 py-3 text-sm outline-none transition focus:ring-2 focus:ring-emerald-300 ${
-                darkMode
-                  ? "border-white/10 bg-white/5 text-white placeholder:text-zinc-500"
-                  : "border-slate-200 bg-slate-50 text-slate-950 placeholder:text-slate-400"
-              }`}
+              className="resize-none rounded-2xl border border-[#E1DDD6] bg-[#F7F4ED] px-4 py-3 text-sm text-[#0F172A] outline-none transition placeholder:text-[#4B5563]/60 focus:border-[#2E5E4E] focus:ring-2 focus:ring-[#2E5E4E]/15"
             />
           </label>
 
           {status === "success" && (
-            <div className="mt-4 flex items-center gap-2 rounded-2xl border border-emerald-300/30 bg-emerald-300/10 px-4 py-3 text-sm font-black text-emerald-300">
+            <div className="mt-4 flex items-center gap-2 rounded-2xl border border-[#2E5E4E]/30 bg-[#2E5E4E]/10 px-4 py-3 text-sm font-black text-[#2E5E4E]">
               <CheckCircle2 size={18} />
-              Message sent successfully.
-            </div>
-          )}
-
-          {status === "error" && (
-            <div className="mt-4 rounded-2xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm font-black text-red-300">
-              Message failed. Please try again or email me directly.
+              Your email app should open with the message ready.
             </div>
           )}
 
           <button
             type="submit"
             disabled={isSending}
-            className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-emerald-300 px-5 py-4 text-sm font-black text-zinc-950 transition hover:bg-emerald-200 disabled:cursor-not-allowed disabled:opacity-70"
+            className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-[#2E5E4E] px-5 py-4 text-sm font-black text-white transition hover:bg-[#0F172A] disabled:cursor-not-allowed disabled:opacity-70"
           >
             {isSending ? (
               <>
                 <Loader2 size={18} className="animate-spin" />
-                Sending
+                Preparing
               </>
             ) : (
               <>

@@ -3,51 +3,49 @@ import {
   Cloud,
   Code2,
   Database,
-  Gauge,
+  PenTool,
   ServerCog,
-  ShieldCheck,
   Smartphone,
-  Workflow,
 } from "lucide-react";
 
 const strengths = [
   {
-    title: "Frontend systems",
+    title: "Fullstack builds",
     icon: Code2,
-    copy: "React interfaces with clean structure, strong states, responsive layouts, and sharp interaction details.",
+    copy: "I connect polished interfaces with backend logic, APIs, auth flows, and database-backed product behavior.",
   },
   {
-    title: "Mobile apps",
+    title: "Product design sense",
+    icon: PenTool,
+    copy: "I care about the journey: what users see, what they click, what feels clear, and what moves them forward.",
+  },
+  {
+    title: "Web and mobile direction",
     icon: Smartphone,
-    copy: "React Native product thinking for mobile experiences that feel focused, usable, and connected to real APIs.",
+    copy: "I build responsive web products and think through mobile-ready flows that can stretch into React Native apps.",
   },
   {
-    title: "Backend logic",
+    title: "Backend systems",
     icon: ServerCog,
-    copy: "Node and Express APIs that keep data flows readable, secure, and ready for real users.",
+    copy: "I structure APIs, data models, integrations, and product logic so the interface is backed by something reliable.",
   },
   {
-    title: "Data design",
+    title: "Data-driven decisions",
     icon: Database,
-    copy: "PostgreSQL-backed thinking for dashboards, finance tools, tasks, and product workflows.",
+    copy: "I like products that turn messy user activity into clear dashboards, summaries, and practical insights.",
   },
   {
-    title: "Performance",
-    icon: Gauge,
-    copy: "Fast pages, lean components, clear loading states, and UI decisions that respect attention.",
-  },
-  {
-    title: "Product delivery",
+    title: "Launch discipline",
     icon: Cloud,
-    copy: "Modern build tooling, deployment awareness, and production polish across web and mobile product work.",
+    copy: "I think beyond the first screen: deployment, performance, iteration, and how the product grows after launch.",
   },
 ];
 
 const workflow = [
-  "Map the user flow before touching the interface",
-  "Build the backend contract around real data needs",
-  "Design responsive screens that feel fast and obvious",
-  "Ship, review, refine, and keep the product moving",
+  "Understand the problem and the real user flow",
+  "Design the product experience before overbuilding",
+  "Build the interface, API logic, and data structure together",
+  "Launch, test, refine, and keep improving the product",
 ];
 
 function AboutMe({ darkMode }) {
@@ -55,33 +53,27 @@ function AboutMe({ darkMode }) {
     <section
       id="about"
       className={`px-4 py-20 sm:px-6 lg:px-8 ${
-        darkMode ? "bg-zinc-950 text-white" : "bg-white text-slate-950"
+        darkMode ? "bg-white" : "bg-[#F7F4ED]"
       }`}
     >
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div data-aos="fade-up">
-            
-
-            <h2 className="max-w-3xl text-balance text-4xl font-black sm:text-5xl">
-              A fullstack software engineer who can own the flow end to end.
+            <h2 className="max-w-3xl text-balance text-4xl font-black leading-tight text-[#0F172A] sm:text-5xl">
+              I build products from idea to shipped experience.
             </h2>
 
-            <div
-              className={`mt-6 space-y-5 text-lg leading-8 ${
-                darkMode ? "text-zinc-300" : "text-slate-700"
-              }`}
-            >
+            <div className="mt-6 space-y-5 text-lg leading-8 text-[#4B5563]">
               <p>
-                I build with the whole product in mind: how a user finds the
-                feature, how the screen responds, how the API behaves, how the
-                database stores truth, and how the final product feels in
-                someone&apos;s hands.
+                I position myself as a fullstack software developer, software
+                engineer, and product designer because useful products need all
+                three: a clear experience, solid implementation, and a reason to
+                exist.
               </p>
               <p>
-                My work sits where design sense meets engineering discipline. I
-                care about clean interfaces, useful systems, and code that can
-                grow without becoming painful to maintain.
+                My work is about building practical tools people can use,
+                testing ideas through real interfaces, and growing product ideas
+                into SaaS products, client builds, and collaborative launches.
               </p>
             </div>
 
@@ -89,17 +81,15 @@ function AboutMe({ darkMode }) {
               {workflow.map((item) => (
                 <div
                   key={item}
-                  className={`flex items-start gap-3 rounded-3xl border p-4 ${
-                    darkMode
-                      ? "border-white/10 bg-white/[0.04]"
-                      : "border-slate-200 bg-slate-50"
-                  }`}
+                  className="flex items-start gap-3 rounded-3xl border border-[#E1DDD6] bg-white p-4 shadow-sm"
                 >
                   <BadgeCheck
                     size={20}
-                    className="mt-0.5 shrink-0 text-emerald-300"
+                    className="mt-0.5 shrink-0 text-[#2E5E4E]"
                   />
-                  <span className="text-sm font-bold leading-6">{item}</span>
+                  <span className="text-sm font-bold leading-6 text-[#0F172A]">
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>
@@ -112,23 +102,17 @@ function AboutMe({ darkMode }) {
               return (
                 <article
                   key={item.title}
-                  className={`rounded-[1.75rem] border p-5 transition hover:-translate-y-1 ${
-                    darkMode
-                      ? "border-white/10 bg-white/[0.04] hover:border-emerald-300/35"
-                      : "border-slate-200 bg-white shadow-sm hover:border-emerald-400"
-                  }`}
+                  className="group rounded-[1.75rem] border border-[#E1DDD6] bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-[#2E5E4E]/40 hover:shadow-[0_18px_55px_rgba(15,23,42,0.08)]"
                   data-aos="fade-up"
                   data-aos-delay={index * 60}
                 >
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-300 text-zinc-950">
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F7F4ED] text-[#2E5E4E] ring-1 ring-[#E1DDD6] transition group-hover:bg-[#2E5E4E] group-hover:text-white">
                     <Icon size={22} />
                   </div>
-                  <h3 className="text-lg font-black">{item.title}</h3>
-                  <p
-                    className={`mt-3 text-sm leading-6 ${
-                      darkMode ? "text-zinc-400" : "text-slate-600"
-                    }`}
-                  >
+                  <h3 className="text-lg font-black text-[#0F172A]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-[#4B5563]">
                     {item.copy}
                   </p>
                 </article>

@@ -1,13 +1,13 @@
-import { ArrowUpRight, Mail } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin } from "lucide-react";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
-import StephLogo from "../images/stephiscode-icon-black.svg";
+import StephLogo from "../assets/new-stephiscode.PNG";
 
 const links = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Skills", href: "#skills" },
+  { label: "TrackMoni", href: "#projects" },
+  { label: "Stack", href: "#skills" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -26,22 +26,14 @@ function Footer({ darkMode }) {
 
   return (
     <footer
-      className={`border-t px-4 py-12 sm:px-6 lg:px-8 ${
-        darkMode
-          ? "border-white/10 bg-zinc-950 text-white"
-          : "border-slate-200 bg-white text-slate-950"
+      className={`border-t border-[#E1DDD6] px-4 py-12 sm:px-6 lg:px-8 ${
+        darkMode ? "bg-[#F7F4ED]" : "bg-white"
       }`}
     >
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
         <div>
           <div className="flex items-center gap-3">
-            <span
-              className={`flex h-12 w-12 items-center justify-center rounded-2xl border ${
-                darkMode
-                  ? "border-emerald-400/30 bg-white/5"
-                  : "border-emerald-500/30 bg-emerald-50"
-              }`}
-            >
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#E1DDD6] bg-white shadow-sm">
               <img
                 src={StephLogo}
                 alt="StephisCode logo"
@@ -49,30 +41,30 @@ function Footer({ darkMode }) {
               />
             </span>
             <div>
-              <p className="text-xl font-black">StephisCode</p>
-              <p
-                className={`text-xs font-bold ${
-                  darkMode ? "text-emerald-300" : "text-emerald-700"
-                }`}
-              >
-                Fullstack Software Engineer
+              <p className="text-xl font-black tracking-[0.18em] text-[#0F172A]">
+                STEPHISCODE
+              </p>
+              <p className="text-xs font-bold uppercase tracking-[0.3em]">
+                <span className="text-[#0F172A]">Build</span>
+                <span className="text-[#2E5E4E]"> . Launch . </span>
+                <span className="text-[#C65D3D]">Impact</span>
               </p>
             </div>
           </div>
 
-          <p
-            className={`mt-5 max-w-xl leading-7 ${
-              darkMode ? "text-zinc-400" : "text-slate-600"
-            }`}
-          >
-            Building modern digital products with sharp interfaces, reliable
-            APIs, mobile app thinking, and the kind of polish that makes a
-            portfolio feel alive.
+          <p className="mt-5 max-w-xl leading-7 text-[#4B5563]">
+            Fullstack software developer, software engineer, and product
+            designer building useful apps, SaaS ideas, and client-ready
+            products from zero to launch.
+          </p>
+          <p className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-[#2E5E4E]">
+            <MapPin size={16} />
+            Lagos, Nigeria
           </p>
         </div>
 
         <div>
-          <h3 className="mb-4 text-sm font-black">
+          <h3 className="mb-4 text-sm font-black uppercase tracking-[0.24em] text-[#0F172A]">
             Navigate
           </h3>
           <div className="grid gap-3">
@@ -80,11 +72,7 @@ function Footer({ darkMode }) {
               <a
                 key={link.label}
                 href={link.href}
-                className={`inline-flex items-center gap-2 text-sm font-bold transition ${
-                  darkMode
-                    ? "text-zinc-400 hover:text-emerald-300"
-                    : "text-slate-600 hover:text-emerald-700"
-                }`}
+                className="inline-flex items-center gap-2 text-sm font-bold text-[#4B5563] transition hover:text-[#2E5E4E]"
               >
                 {link.label}
                 <ArrowUpRight size={14} />
@@ -94,7 +82,7 @@ function Footer({ darkMode }) {
         </div>
 
         <div>
-          <h3 className="mb-4 text-sm font-black">
+          <h3 className="mb-4 text-sm font-black uppercase tracking-[0.24em] text-[#0F172A]">
             Connect
           </h3>
           <div className="flex flex-wrap gap-3">
@@ -112,11 +100,7 @@ function Footer({ darkMode }) {
                       : "noopener noreferrer"
                   }
                   aria-label={social.label}
-                  className={`flex h-11 w-11 items-center justify-center rounded-full border transition ${
-                    darkMode
-                      ? "border-white/10 bg-white/5 text-zinc-300 hover:border-emerald-300/40 hover:text-emerald-300"
-                      : "border-slate-200 bg-slate-50 text-slate-700 hover:border-emerald-500/40 hover:text-emerald-700"
-                  }`}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E1DDD6] bg-white text-[#4B5563] transition hover:-translate-y-0.5 hover:border-[#2E5E4E] hover:text-[#2E5E4E]"
                 >
                   <Icon />
                 </a>
@@ -125,7 +109,7 @@ function Footer({ darkMode }) {
           </div>
           <a
             href="mailto:Stephiscode@gmail.com"
-            className="mt-5 inline-flex items-center gap-2 rounded-full bg-emerald-300 px-4 py-2 text-sm font-black text-zinc-950 transition hover:bg-emerald-200"
+            className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#2E5E4E] px-4 py-2 text-sm font-black text-white transition hover:bg-[#0F172A]"
           >
             <Mail size={16} />
             Email me
@@ -133,14 +117,8 @@ function Footer({ darkMode }) {
         </div>
       </div>
 
-      <div
-        className={`mx-auto mt-10 max-w-7xl border-t pt-5 text-sm ${
-          darkMode
-            ? "border-white/10 text-zinc-500"
-            : "border-slate-200 text-slate-500"
-        }`}
-      >
-        (c) {year} StephisCode. All rights reserved.
+      <div className="mx-auto mt-10 max-w-7xl border-t border-[#E1DDD6] pt-5 text-sm text-[#4B5563]">
+        (c) {year} StephisCode. Build. Launch. Impact.
       </div>
     </footer>
   );
