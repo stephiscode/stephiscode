@@ -19,8 +19,8 @@ export default function Hero({ darkMode }) {
     <section id="home" className={`px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24 ${darkMode ? "bg-[#F7F4ED]" : "bg-white"}`}>
       <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
         <div>
-          <h1 className="max-w-3xl text-[clamp(3.25rem,6.1vw,5.5rem)] font-extrabold leading-[1.04] tracking-[-0.055em] text-[#0F172A]">
-            Software<br />that means<br /><span className="text-[#2E5E4E]">business.</span>
+          <h1 className="max-w-3xl text-[2.5rem] sm:text-6xl lg:text-[3.25rem] xl:text-[4.5rem] font-extrabold leading-[1.04] tracking-[-0.055em] text-[#0F172A]">
+            Thoughtful design.<br />Dependable code.<br /><span className="text-[#2E5E4E]">Built for your<br className="hidden xl:block" /> business.</span>
           </h1>
           <p className="mt-7 max-w-lg text-base leading-8 text-[#4B5563] sm:text-lg">
             I’m Steph. I design and develop custom websites, mobile apps, and business systems, connecting polished interfaces with dependable engineering.
