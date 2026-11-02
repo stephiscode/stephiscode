@@ -101,12 +101,12 @@ function ContactMe({ darkMode }) {
           </p>
 
           <h2 className="text-balance text-4xl font-black leading-tight text-[#0F172A] sm:text-5xl">
-            Have an app idea, product problem, or client build?
+            Have something in mind? Let’s build it.
           </h2>
           <p className="mt-6 text-lg leading-8 text-[#4B5563]">
-            I am open to freelance work, SaaS collaboration, dashboards, mobile
-            app flows, APIs, and fullstack products that need both design sense
-            and engineering discipline.
+            Tell me about your business, the problem you want to solve, and
+            what a successful launch looks like. I’ll help you work out the
+            right next step.
           </p>
 
           <div className="mt-8 grid gap-4">
@@ -213,11 +213,11 @@ function ContactMe({ darkMode }) {
                 <Mail size={22} />
               </div>
               <h3 className="text-2xl font-black text-[#0F172A]">
-                Share the product details.
+                Your next project starts here.
               </h3>
               <p className="mt-2 text-sm leading-6 text-[#4B5563]">
-                Send the idea, feature, timeline, or collaboration note. I will
-                read it like a builder, not just a form submission.
+                A few details are all we need to start a conversation. Include
+                your goals, preferred timeline, and budget if you have one.
               </p>
             </div>
             <MessageSquare size={22} className="hidden text-[#2E5E4E] sm:block" />
@@ -229,6 +229,7 @@ function ContactMe({ darkMode }) {
               <input
                 type="text"
                 name="name"
+                autoComplete="name"
                 placeholder="Your name"
                 required
                 className="rounded-2xl border border-[#E1DDD6] bg-[#F7F4ED] px-4 py-3 text-sm text-[#0F172A] outline-none transition placeholder:text-[#4B5563]/60 focus:border-[#2E5E4E] focus:ring-2 focus:ring-[#2E5E4E]/15"
@@ -240,6 +241,7 @@ function ContactMe({ darkMode }) {
               <input
                 type="email"
                 name="email"
+                autoComplete="email"
                 placeholder="you@email.com"
                 required
                 className="rounded-2xl border border-[#E1DDD6] bg-[#F7F4ED] px-4 py-3 text-sm text-[#0F172A] outline-none transition placeholder:text-[#4B5563]/60 focus:border-[#2E5E4E] focus:ring-2 focus:ring-[#2E5E4E]/15"

@@ -1,26 +1,25 @@
 import { useState } from "react";
 import {
-  Code2,
-  Download,
+  ArrowUpRight,
   FolderKanban,
   Home,
   Mail,
   Menu,
-  Moon,
+  Palette,
   Sun,
   UserRound,
+  BriefcaseBusiness,
   X,
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import resume from "../assets/Stefiscode_Resume.pdf";
 import StephLogo from "../assets/new-stephiscode.PNG";
 
 const navItems = [
   { label: "Home", section: "home", icon: Home },
   { label: "About", section: "about", icon: UserRound },
-  { label: "Project", section: "projects", icon: FolderKanban },
-  { label: "Stack", section: "skills", icon: Code2 },
+  { label: "Projects", section: "projects", icon: FolderKanban },
+  { label: "Services", section: "services", icon: BriefcaseBusiness },
   { label: "Contact", section: "contact", icon: Mail },
 ];
 
@@ -31,7 +30,7 @@ function NavBar({ darkMode, setDarkMode }) {
 
   const scrollToSection = (section) => {
     const target = document.getElementById(section);
-    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+    target?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" });
   };
 
   const handleNav = (section) => {
@@ -48,6 +47,7 @@ function NavBar({ darkMode, setDarkMode }) {
 
   return (
     <header
+      onKeyDown={(event) => { if (event.key === "Escape") setMenuOpen(false); }}
       className={`sticky top-0 z-50 border-b backdrop-blur-2xl transition-colors duration-500 ${
         darkMode
           ? "border-[#2E5E4E]/15 bg-[#F7F4ED]/90"
@@ -68,6 +68,7 @@ function NavBar({ darkMode, setDarkMode }) {
               className="h-9 w-9 object-contain"
             />
           </span>
+          <span className="text-sm font-extrabold tracking-tight text-[#0F172A] sm:text-base">stephiscode</span>
         </button>
 
         <div
@@ -81,7 +82,7 @@ function NavBar({ darkMode, setDarkMode }) {
                 key={item.section}
                 type="button"
                 onClick={() => handleNav(item.section)}
-                className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold text-[#4B5563] transition hover:bg-[#F7F4ED] hover:text-[#0F172A]"
+                className="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-bold text-[#4B5563] transition hover:bg-[#F7F4ED] hover:text-[#0F172A]"
               >
                 <Icon size={16} />
                 {item.label}
@@ -91,14 +92,14 @@ function NavBar({ darkMode, setDarkMode }) {
         </div>
 
         <div className="flex items-center gap-2">
-          <a
-            href={resume}
-            download="Stefiscode_Resume.pdf"
+          <button
+            type="button"
+            onClick={() => handleNav("contact")}
             className="hidden items-center gap-2 rounded-full bg-[#0F172A] px-4 py-2 text-sm font-black text-white transition hover:bg-[#2E5E4E] sm:flex"
           >
-            <Download size={16} />
-            Resume
-          </a>
+            Start a project
+            <ArrowUpRight size={16} />
+          </button>
 
           <button
             type="button"
@@ -108,9 +109,9 @@ function NavBar({ darkMode, setDarkMode }) {
                 ? "border-[#2E5E4E] bg-[#2E5E4E] text-white"
                 : "border-[#E1DDD6] bg-white text-[#0F172A] hover:border-[#2E5E4E]"
             }`}
-            aria-label="Toggle theme"
+            aria-label={darkMode ? "Switch to white background" : "Switch to cream background"}
           >
-            {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+            {darkMode ? <Sun size={18} /> : <Palette size={18} />}
           </button>
 
           <button
@@ -118,6 +119,8 @@ function NavBar({ darkMode, setDarkMode }) {
             onClick={() => setMenuOpen(!menuOpen)}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E1DDD6] bg-white text-[#0F172A] transition hover:border-[#2E5E4E] lg:hidden"
             aria-label="Toggle navigation menu"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
           >
             {menuOpen ? <X size={19} /> : <Menu size={19} />}
           </button>
@@ -126,6 +129,7 @@ function NavBar({ darkMode, setDarkMode }) {
 
       {menuOpen && (
         <div
+          id="mobile-navigation"
           className="border-t border-[#E1DDD6] bg-white px-4 pb-4 lg:hidden"
         >
           <div className="mx-auto grid max-w-7xl gap-2 pt-3">
@@ -146,14 +150,14 @@ function NavBar({ darkMode, setDarkMode }) {
                 </button>
               );
             })}
-            <a
-              href={resume}
-              download="Stefiscode_Resume.pdf"
+            <button
+              type="button"
+              onClick={() => handleNav("contact")}
               className="mt-2 flex items-center justify-center gap-2 rounded-2xl bg-[#0F172A] px-4 py-3 text-sm font-black text-white"
             >
-              <Download size={16} />
-              Download Resume
-            </a>
+              Start a project
+              <ArrowUpRight size={16} />
+            </button>
           </div>
         </div>
       )}

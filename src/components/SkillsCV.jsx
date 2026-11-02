@@ -73,6 +73,8 @@ function SkillsCV({ darkMode }) {
       }`}
     >
       <div className="mx-auto max-w-7xl">
+        <p className="section-eyebrow">Behind the build</p>
+        <h2 className="section-title mb-10 mt-4">The tools to make it happen.</h2>
         <div className="grid gap-5 lg:grid-cols-3">
           {skillGroups.map((group, index) => {
             const GroupIcon = group.icon;
@@ -94,16 +96,16 @@ function SkillsCV({ darkMode }) {
                   {group.description}
                 </p>
 
-                <div className="mt-6 grid gap-3">
+                <div className="mt-6 flex flex-wrap gap-2">
                   {group.skills.map((skill) => {
                     const SkillIcon = skill.icon;
 
                     return (
                       <div
                         key={skill.name}
-                        className="flex items-center gap-3 rounded-2xl border border-[#E1DDD6] bg-[#F7F4ED] px-4 py-3"
+                        className="flex items-center gap-3 rounded-full border border-[#E1DDD6] bg-[#F7F4ED] px-3 py-2"
                       >
-                        <SkillIcon size={21} className="text-[#2E5E4E]" />
+                        <SkillIcon size={16} className="text-[#2E5E4E]" />
                         <span className="text-sm font-black text-[#0F172A]">
                           {skill.name}
                         </span>

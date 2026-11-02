@@ -1,210 +1,80 @@
-import {
-  ArrowUpRight,
-  Code2,
-  Database,
-  Layers3,
-  ServerCog,
-  Smartphone,
-} from "lucide-react";
-import {
-  FaEnvelope,
-  FaGithub,
-  FaInstagramSquare,
-  FaLinkedin,
-  FaReact,
-} from "react-icons/fa";
-import { FaSquareXTwitter } from "react-icons/fa6";
-import {
-  SiNextdotjs,
-  SiPostgresql,
-  SiTailwindcss,
-  SiTypescript,
-} from "react-icons/si";
-
-import StephLogo from "../assets/new-stephiscode.PNG";
-
-const stack = [
-  { name: "React", icon: FaReact },
-  { name: "React Native", icon: Smartphone },
-  { name: "Next.js", icon: SiNextdotjs },
-  { name: "TypeScript", icon: SiTypescript },
-  { name: "Node APIs", icon: ServerCog },
-  { name: "PostgreSQL", icon: SiPostgresql },
-  { name: "Tailwind", icon: SiTailwindcss },
-  { name: "Product UI", icon: Layers3 },
-];
-
-const builderNotes = [
-  {
-    title: "Build",
-    copy: "I turn rough ideas into useful product flows, clean interfaces, and backend-ready structures.",
-  },
-  {
-    title: "Launch",
-    copy: "I ship responsive web apps, mobile-ready experiences, dashboards, and client-facing products.",
-  },
-  {
-    title: "Impact",
-    copy: "I focus on useful outcomes, clear value, and products that can keep growing after launch.",
-  },
-];
+import { ArrowDown, ArrowUpRight, Braces, Database, Layers3, Network } from "lucide-react";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { projects } from "../data/projects";
 
 const socials = [
   { label: "GitHub", href: "https://github.com/stephiscode", icon: FaGithub },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/stephen-okeke-405569331/",
-    icon: FaLinkedin,
-  },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/stephen-okeke-405569331/", icon: FaLinkedin },
   { label: "Email", href: "mailto:Stephiscode@gmail.com", icon: FaEnvelope },
-  { label: "X", href: "https://www.x.com/stephiscode", icon: FaSquareXTwitter },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/stephiscode/",
-    icon: FaInstagramSquare,
-  },
 ];
 
-function Hero({ darkMode }) {
+const layers = [
+  { title: "Experience", detail: "Web & mobile interfaces", tools: "React · Next.js · React Native", icon: Layers3 },
+  { title: "Application", detail: "Business logic & integrations", tools: "Node.js · APIs · Authentication", icon: Braces },
+  { title: "Data", detail: "Structured, connected systems", tools: "PostgreSQL · Prisma", icon: Database },
+];
+
+export default function Hero({ darkMode }) {
   return (
-    <section
-      id="home"
-      className={`px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24 ${
-        darkMode ? "bg-[#F7F4ED]" : "bg-white"
-      }`}
-    >
-      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
-        <div data-aos="fade-up">
-          <h1 className="max-w-4xl text-balance text-5xl font-black leading-[1.02] tracking-tight text-[#0F172A] sm:text-6xl lg:text-7xl">
-            I build digital products that move from idea to real-life use.
+    <section id="home" className={`px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24 ${darkMode ? "bg-[#F7F4ED]" : "bg-white"}`}>
+      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
+        <div>
+          <h1 className="max-w-3xl text-[clamp(3.25rem,6.1vw,5.5rem)] font-extrabold leading-[1.04] tracking-[-0.055em] text-[#0F172A]">
+            Software<br />that means<br /><span className="text-[#2E5E4E]">business.</span>
           </h1>
-
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[#4B5563] sm:text-xl">
-            I'm Steph, a fullstack software developer, software engineer,
-            and product designer building useful apps, SaaS products, and client
-            projects with clean interfaces and reliable systems.
+          <p className="mt-7 max-w-lg text-base leading-8 text-[#4B5563] sm:text-lg">
+            I’m Steph. I design and develop custom websites, mobile apps, and business systems, connecting polished interfaces with dependable engineering.
           </p>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="#projects"
-              className="group inline-flex items-center gap-2 rounded-full bg-[#0F172A] px-5 py-3 text-sm font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-[#2E5E4E]"
-            >
-              View Projects
-              <ArrowUpRight
-                size={17}
-                className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
+          <div className="mt-9 flex flex-wrap gap-3">
+            <a href="#contact" className="group inline-flex items-center gap-3 rounded-full bg-[#2E5E4E] py-3.5 pl-6 pr-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#0F172A]">
+              Let’s build your idea
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/15"><ArrowUpRight size={17} className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span>
             </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 rounded-full border border-[#E1DDD6] bg-white px-5 py-3 text-sm font-extrabold text-[#0F172A] transition hover:-translate-y-0.5 hover:border-[#2E5E4E] hover:bg-[#F7F4ED]"
-            >
-              Start a Build
-              <FaEnvelope size={15} />
+            <a href="#projects" className="inline-flex items-center gap-3 rounded-full border border-[#D8D6CD] px-5 py-3.5 text-sm font-bold text-[#0F172A] transition hover:border-[#2E5E4E] hover:bg-white">
+              Explore my work <ArrowDown size={17} />
             </a>
           </div>
-
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            {socials.map((social) => {
-              const Icon = social.icon;
-
-              return (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target={social.href.startsWith("mailto:") ? undefined : "_blank"}
-                  rel={
-                    social.href.startsWith("mailto:")
-                      ? undefined
-                      : "noopener noreferrer"
-                  }
-                  aria-label={social.label}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E1DDD6] bg-white text-base text-[#4B5563] transition hover:-translate-y-0.5 hover:border-[#2E5E4E] hover:text-[#2E5E4E]"
-                >
-                  <Icon />
-                </a>
-              );
-            })}
-          </div>
-
-          <div className="mt-8 flex flex-wrap gap-2">
-            {stack.map((item) => {
-              const Icon = item.icon;
-
-              return (
-                <span
-                  key={item.name}
-                  className="inline-flex items-center gap-2 rounded-full border border-[#E1DDD6] bg-white px-3 py-2 text-xs font-black text-[#0F172A]"
-                >
-                  <Icon size={15} className="text-[#2E5E4E]" />
-                  {item.name}
-                </span>
-              );
-            })}
+          <div className="mt-8 flex items-center gap-3">
+            {socials.map(({ label, href, icon: Icon }) => (
+              <a key={label} href={href} aria-label={label} target={href.startsWith("mailto:") ? undefined : "_blank"} rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"} className="flex h-11 w-11 items-center justify-center rounded-full border border-[#D8D6CD] text-[#4B5563] transition hover:-translate-y-0.5 hover:border-[#2E5E4E] hover:text-[#2E5E4E]"><Icon size={17} /></a>
+            ))}
           </div>
         </div>
 
-        <aside className="relative" data-aos="fade-left" data-aos-delay="120">
-          <div className="rounded-[2rem] border border-[#E1DDD6] bg-[#F7F4ED] p-6 shadow-[0_28px_80px_rgba(15,23,42,0.10)] sm:p-8">
-            <div className="flex items-center justify-between gap-5 border-b border-[#E1DDD6] pb-6">
+        <aside aria-label="Fullstack engineering and featured projects" className="min-w-0">
+          <div className="relative overflow-hidden rounded-[1.75rem] border border-[#386150] bg-[#234C3E] p-5 text-white shadow-[0_22px_60px_-30px_rgba(35,76,62,0.5)] sm:p-7">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "linear-gradient(#E6EACD 1px, transparent 1px), linear-gradient(90deg, #E6EACD 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+            <div className="relative">
+              <div className="flex items-center justify-between gap-3 border-b border-white/20 pb-5">
+                <span className="font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-[#D3DFC1]">Fullstack engineering</span>
+                <Network size={20} strokeWidth={1.5} className="text-[#D3DFC1]" aria-hidden="true" />
+              </div>
+              <h2 className="mb-7 mt-6 text-3xl font-semibold leading-[1.15] tracking-tight sm:text-[2.15rem]">From interface<br /><span className="text-[#D3DFC1]">to infrastructure.</span></h2>
               <div>
-                <p className="text-sm font-black uppercase tracking-[0.28em] text-[#2E5E4E]">
-                  StephisCode Studio
-                </p>
-                <h2 className="mt-3 max-w-md text-3xl font-black leading-tight text-[#0F172A] sm:text-4xl">
-                  Builder. Founder. Problem solver.
-                </h2>
-              </div>
-              <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.5rem] border border-[#E1DDD6] bg-white shadow-sm">
-                <img
-                  src={StephLogo}
-                  alt="StephisCode mark"
-                  className="h-14 w-14 object-contain"
-                />
-              </div>
-            </div>
-
-            <div className="divide-y divide-[#E1DDD6]">
-              {builderNotes.map((item, index) => (
-                <div
-                  key={item.title}
-                  className="grid gap-3 py-5 sm:grid-cols-[120px_1fr]"
-                  data-aos="fade-up"
-                  data-aos-delay={180 + index * 90}
-                >
-                  <p className="text-sm font-black uppercase tracking-[0.28em] text-[#C65D3D]">
-                    {item.title}
-                  </p>
-                  <p className="text-sm leading-6 text-[#4B5563]">{item.copy}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-2 grid gap-3 sm:grid-cols-3">
-              {[
-                { label: "Product UI", icon: Layers3 },
-                { label: "APIs", icon: Code2 },
-                { label: "Data", icon: Database },
-              ].map((item) => {
-                const Icon = item.icon;
-
-                return (
-                  <div
-                    key={item.label}
-                    className="flex items-center gap-2 rounded-2xl border border-[#E1DDD6] bg-white px-3 py-3 text-sm font-black text-[#0F172A]"
-                  >
-                    <Icon size={17} className="text-[#2E5E4E]" />
-                    {item.label}
+                {layers.map(({ title, detail, tools, icon: Icon }, index) => (
+                  <div key={title}>
+                    {index > 0 && <div aria-hidden="true" className="ml-[1.6rem] h-4 w-px bg-[#8BAA94]/60" />}
+                    <div className="flex gap-3 rounded-xl border border-[#789981]/35 bg-[#1D4135] p-3.5 sm:gap-4 sm:p-4">
+                      <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[#789981]/40 bg-[#2E5847] text-[#E6EACD]"><Icon size={18} strokeWidth={1.6} aria-hidden="true" /></span>
+                      <div className="min-w-0"><h3 className="text-sm font-semibold text-white">{title}<span className="ml-2 hidden text-[10px] font-normal text-[#C1D1C5] xl:inline">/ {detail}</span></h3><p className="mt-1.5 font-mono text-[10px] leading-5 text-[#D3DFC1] sm:text-[11px]">{tools}</p></div>
+                    </div>
                   </div>
-                );
-              })}
+                ))}
+              </div>
             </div>
-
+          </div>
+          <div className="mt-5 flex items-center gap-3"><span className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#4B5563]">Featured builds</span><span aria-hidden="true" className="h-px flex-1 bg-[#D8D6CD]" /></div>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            {projects.filter(project => ["trackmoni", "theeplugg"].includes(project.id)).map(project => (
+              <a key={project.id} href={project.live} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${project.name}`} className="group flex min-w-0 items-center gap-3 rounded-2xl border border-[#E1DDD6] bg-white p-3 transition hover:-translate-y-0.5 hover:border-[#2E5E4E]/50">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style={{ backgroundColor: project.color }}><img src={project.logo} alt="" width="40" height="40" className="h-10 w-10 object-contain" /></span>
+                <span className="min-w-0 flex-1"><span className="block text-xs font-bold text-[#0F172A]">{project.name}</span><span className="mt-1 block text-[10px] text-[#4B5563]">{project.category}</span></span>
+                <ArrowUpRight size={15} className="shrink-0 text-[#2E5E4E] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+            ))}
           </div>
         </aside>
       </div>
     </section>
   );
 }
-
-export default Hero;

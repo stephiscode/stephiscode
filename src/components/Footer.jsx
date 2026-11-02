@@ -1,14 +1,16 @@
-import { ArrowUpRight, Mail, MapPin } from "lucide-react";
+import { ArrowUpRight, Mail } from "lucide-react";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
 import StephLogo from "../assets/new-stephiscode.PNG";
 
 const links = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "TrackMoni", href: "#projects" },
-  { label: "Stack", href: "#skills" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/#home" },
+  { label: "About", href: "/#about" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Services", href: "/#services" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Stack", href: "/#skills" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const socials = [
@@ -56,10 +58,6 @@ function Footer({ darkMode }) {
             Fullstack software developer, software engineer, and product
             designer building useful apps, SaaS ideas, and client-ready
             products from zero to launch.
-          </p>
-          <p className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-[#2E5E4E]">
-            <MapPin size={16} />
-            Lagos, Nigeria
           </p>
         </div>
 
@@ -118,7 +116,7 @@ function Footer({ darkMode }) {
       </div>
 
       <div className="mx-auto mt-10 max-w-7xl border-t border-[#E1DDD6] pt-5 text-sm text-[#4B5563]">
-        (c) {year} StephisCode. Build. Launch. Impact.
+        © {year} StephisCode. Build. Launch. Impact.
       </div>
     </footer>
   );

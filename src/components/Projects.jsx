@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowUpRight,
   BadgeCheck,
@@ -10,51 +10,26 @@ import {
   Smartphone,
 } from "lucide-react";
 
-import trackMoniLogo from "../images/project-icons/trackmoni-logo.svg";
+import { projects } from "../data/projects";
 
-const projects = [{
-  id: "trackmoni",
-  name: "TrackMoni",
-  live: "https://www.trackmoni.online/",
-  logo: trackMoniLogo,
-  description:
-    "An expense tracker and personal finance dashboard built to help users understand income, expenses, bills, and money movement from one clean product.",
-  highlights: [
-    "Expense, income, bills, and transaction workflows",
-    "Dashboard summaries and analytics for money decisions",
-    "Installable PWA experience for app-like access",
-  ],
-  stack: ["Next.js", "TypeScript", "Prisma", "Recharts", "PWA", "API routes"],
-}];
-
-const INITIAL_PROJECT_COUNT = 6;
-
-const breakdown = [
-  {
-    title: "Problem",
-    icon: Gauge,
-    copy: "People need a simple way to understand where their money is going without depending on scattered notes or spreadsheets.",
-  },
-  {
-    title: "Build",
-    icon: Database,
-    copy: "TrackMoni organizes financial activity into authenticated dashboards, summaries, transaction history, bill flows, and data-backed views.",
-  },
-  {
-    title: "Product detail",
-    icon: Smartphone,
-    copy: "The PWA feature gives it a more app-like feel, so users can access the product more naturally from their device.",
-  },
-  {
-    title: "Impact",
-    icon: ShieldCheck,
-    copy: "The product helps users see patterns, manage expenses, and make better financial decisions with less friction.",
-  },
-];
+const INITIAL_PROJECT_COUNT = 3;
+const breakdownIcons = [Gauge, Database, Smartphone, ShieldCheck];
 
 function Projects({ darkMode }) {
   const [expandedProject, setExpandedProject] = useState(null);
   const [showAll, setShowAll] = useState(false);
+  const detailRef = useRef(null);
+  useEffect(() => {
+    if (expandedProject && detailRef.current) {
+      detailRef.current.focus({ preventScroll: true });
+      detailRef.current.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" });
+    }
+  }, [expandedProject]);
+  const closeDetails = () => {
+    const trigger = document.getElementById(`project-trigger-${expandedProject}`);
+    setExpandedProject(null);
+    trigger?.focus();
+  };
   const visibleProjects = showAll
     ? projects
     : projects.slice(0, INITIAL_PROJECT_COUNT);
@@ -71,9 +46,11 @@ function Projects({ darkMode }) {
     >
       <div className="mx-auto max-w-7xl">
         <div className="mb-10" data-aos="fade-up">
+          <p className="section-eyebrow mb-4">Portfolio</p>
           <h2 className="text-balance text-4xl font-black leading-tight text-[#0F172A] sm:text-5xl">
-            Projects
+            Selected Projects
           </h2>
+          <p className="mt-4 max-w-2xl leading-7 text-[#4B5563]">Real products for everyday needs. Explore the experience, the business behind it, and what I built.</p>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -83,28 +60,15 @@ function Projects({ darkMode }) {
             return (
               <article
                 key={project.id}
-                className="flex min-h-[20rem] flex-col rounded-2xl border border-[#E1DDD6] bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#2E5E4E]/40 hover:shadow-[0_22px_60px_rgba(15,23,42,0.08)]"
+                className="project-card flex flex-col rounded-2xl border border-[#E1DDD6] bg-white p-5 transition duration-300 hover:-translate-y-1 hover:border-[#2E5E4E]/40 hover:shadow-[0_22px_60px_rgba(15,23,42,0.08)] sm:p-6"
                 data-aos="fade-up"
                 data-aos-delay={index * 80}
               >
-                <div className="mb-7 flex items-start justify-between gap-4">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-[#E1DDD6] bg-[#F7F4ED]">
-                    <img
-                      src={project.logo}
-                      alt={`${project.name} logo`}
-                      className="h-10 w-10 object-contain"
-                    />
-                  </div>
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#E1DDD6] bg-white text-[#0F172A] transition hover:border-[#2E5E4E] hover:text-[#2E5E4E]"
-                    aria-label={`Open ${project.name}`}
-                    title={`Open ${project.name}`}
-                  >
-                    <ArrowUpRight size={18} />
-                  </a>
+                <div className="relative mb-6 flex h-44 items-center justify-center overflow-hidden rounded-xl" style={{ backgroundColor: project.color }}>
+                  <img src={project.logo} alt={`${project.name} logo`} width="128" height="128" loading="lazy" className={`h-32 w-32 object-contain ${project.id === "kismat" ? "mix-blend-multiply" : ""}`} />
+                  <a href={project.live} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name}`} className="absolute right-3 top-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#0F172A] transition hover:bg-[#2E5E4E] hover:text-white"><ArrowUpRight size={18} /></a>
+                  <span className="absolute bottom-3 left-4 text-[10px] font-bold uppercase tracking-[0.2em] text-[#4B5563]">{project.category}</span>
+                  <span className="absolute bottom-3 right-4 text-[10px] font-semibold text-[#4B5563]">0{index + 1}</span>
                 </div>
 
                 <h3 className="text-2xl font-black text-[#0F172A]">
@@ -121,6 +85,9 @@ function Projects({ darkMode }) {
                       setExpandedProject(expanded ? null : project.id)
                     }
                     className="inline-flex items-center gap-2 rounded-full bg-[#0F172A] px-4 py-2.5 text-sm font-black text-white transition hover:bg-[#2E5E4E]"
+                    id={`project-trigger-${project.id}`}
+                    aria-label={`Learn more about ${project.name}`}
+                    aria-controls={expanded ? `project-details-${project.id}` : undefined}
                     aria-expanded={expanded}
                   >
                     Learn more
@@ -148,11 +115,14 @@ function Projects({ darkMode }) {
           <div className="mt-8 flex justify-center">
             <button
               type="button"
-              onClick={() => setShowAll(!showAll)}
+              onClick={() => {
+                if (showAll && !projects.slice(0, INITIAL_PROJECT_COUNT).some(project => project.id === expandedProject)) setExpandedProject(null);
+                setShowAll(!showAll);
+              }}
               className="inline-flex items-center gap-2 rounded-full border border-[#0F172A] bg-white px-5 py-3 text-sm font-black text-[#0F172A] transition hover:bg-[#0F172A] hover:text-white"
               aria-expanded={showAll}
             >
-              {showAll ? "Show fewer projects" : "See More Projects"}
+              {showAll ? "Show fewer projects" : "View All Projects"}
               <ChevronDown
                 size={17}
                 className={`transition ${showAll ? "rotate-180" : ""}`}
@@ -163,9 +133,14 @@ function Projects({ darkMode }) {
 
         {selectedProject && (
           <div
-            className="mt-6 rounded-2xl border border-[#E1DDD6] bg-[#F7F4ED] p-5 shadow-sm sm:p-6"
-            data-aos="fade-up"
+            id={`project-details-${selectedProject.id}`}
+            ref={detailRef}
+            tabIndex={-1}
+            role="region"
+            aria-label={`${selectedProject.name} project details`}
+            className="project-details mt-6 rounded-2xl border border-[#E1DDD6] bg-[#F7F4ED] p-5 shadow-sm sm:p-6"
           >
+            <button type="button" onClick={closeDetails} className="mb-5 rounded-full border border-[#D8D6CD] bg-white px-4 py-2 text-sm font-bold text-[#2E5E4E] hover:bg-[#E7EDE6]">Close details <span aria-hidden="true">×</span></button>
             <div className="mb-5 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
               <div>
                 <h3 className="text-2xl font-black text-[#0F172A]">
@@ -188,8 +163,8 @@ function Projects({ darkMode }) {
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {breakdown.map((item) => {
-                const Icon = item.icon;
+              {selectedProject.breakdown.map((item, index) => {
+                const Icon = breakdownIcons[index];
 
                 return (
                   <div

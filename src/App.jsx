@@ -10,10 +10,11 @@ import SkillsCV from "./components/SkillsCV";
 import "aos/dist/aos.css";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     AOS.init({
+      disable: () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
       duration: 700,
       once: true,
       easing: "ease-out-cubic",

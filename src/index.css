@@ -53,3 +53,21 @@
     animation: none;
   }
 }
+
+@layer components {
+  .section-eyebrow { @apply text-xs font-bold uppercase tracking-[0.2em] text-[#2E5E4E]; }
+  .section-title { @apply text-4xl font-extrabold leading-tight tracking-tight text-[#0F172A] sm:text-5xl; }
+}
+
+section[id], .project-details { scroll-margin-top: 100px; }
+a, button, input, textarea, select { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 3px solid #C65D3D; outline-offset: 5px; }
+.project-details:focus { outline: 2px solid #2E5E4E; outline-offset: 4px; }
+.studio-panel::after { content: ""; position: absolute; width: 380px; height: 380px; border: 1px solid rgb(211 223 193 / 10%); border-radius: 50%; right: -190px; top: -180px; box-shadow: 0 0 0 45px rgb(211 223 193 / 3%), 0 0 0 90px rgb(211 223 193 / 3%); pointer-events: none; }
+.skip-link { position: fixed; top: -80px; left: 16px; z-index: 100; border-radius: 8px; padding: 12px 20px; background: #0F172A; color: white; }
+.skip-link:focus { top: 12px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  [data-aos] { opacity: 1 !important; transform: none !important; }
+}
